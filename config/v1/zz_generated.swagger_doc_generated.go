@@ -2531,4 +2531,29 @@ func (TLSSecurityProfile) SwaggerDoc() map[string]string {
 	return map_TLSSecurityProfile
 }
 
+var map_UpdateStatus = map[string]string{
+	"":         "UpdateStatus is the API for aggregated insights about in-progress updates (oc adm update status). The Update Status Controller keeps this object populated by querying UpdateInformers.\n\nCompatibility level 1: Stable within a major release for a minimum of 12 months or 3 minor releases (whichever is longer).",
+	"metadata": "metadata is the standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
+}
+
+func (UpdateStatus) SwaggerDoc() map[string]string {
+	return map_UpdateStatus
+}
+
+var map_UpdateStatusSpec = map[string]string{
+	"": "UpdateStatusSpec is not used now, but it can be used to configure the Update Status Controller in the future",
+}
+
+func (UpdateStatusSpec) SwaggerDoc() map[string]string {
+	return map_UpdateStatusSpec
+}
+
+var map_UpdateStatusStatus = map[string]string{
+	"": "UpdateStatusStatus contains an aggregated view of the UpdateInsights collected by the Update Status Controller.`",
+}
+
+func (UpdateStatusStatus) SwaggerDoc() map[string]string {
+	return map_UpdateStatusStatus
+}
+
 // AUTO-GENERATED FUNCTIONS END HERE
