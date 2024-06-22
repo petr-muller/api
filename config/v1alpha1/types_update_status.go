@@ -119,6 +119,8 @@ type PoolUpdateStatus struct {
 // UpdateInformer is an insight producer identified by a name, carrying a list of insights it produced
 type UpdateInformer struct {
 	// Name is the name of the insight producer
+	// +required
+	// +kubebuilder:validation:Required
 	Name string `json:"name"`
 
 	// Insights is a list of insights produced by this producer
