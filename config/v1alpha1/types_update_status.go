@@ -52,7 +52,8 @@ type UpdateStatusStatus struct {
 type ControlPlaneUpdateStatus struct {
 	// Summary contains a summary of the control plane update, forming an Update Status Controller opinion out of insights
 	// available to it
-	Summary ControlPlaneUpdateStatusSummary `json:",inline"`
+	// TODO(muller): I wanted it inline but was not able to make serialization work
+	Summary ControlPlaneUpdateStatusSummary `json:"summary"`
 
 	// Informers is a list of insight producers, each carries a list of insights
 	// +listType=map
