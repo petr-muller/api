@@ -88,15 +88,18 @@ type ControlPlaneUpdateStatusSummary struct {
 
 // ControlPlaneUpdateVersions contains the original and target versions of the upgrade
 type ControlPlaneUpdateVersions struct {
-	// Original is the version of the control plane before the update
-	Original string `json:"original"`
+	// Previous is the version of the control plane before the update
+	Previous string `json:"original"`
 
-	// OriginalPartial is true if the update was initiated in a state where the previous upgrade (to the original version)
+	// IsPreviousPartial is true if the update was initiated in a state where the previous upgrade (to the original version)
 	// was not fully completed
-	OriginalPartial bool `json:"originalPartial,omitempty"`
+	IsPreviousPartial bool `json:"previousPartial,omitempty"`
 
 	// Target is the version of the control plane after the update
 	Target string `json:"target"`
+
+	// IsTargetInstall is true if the current work is an installation, not an upgrade
+	IsTargetInstall bool `json:"targetInstall,omitempty"`
 }
 
 // PoolUpdateStatus contains a summary and insights related to a worker pool update
