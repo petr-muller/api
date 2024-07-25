@@ -48,6 +48,12 @@ type UpdateStatusStatus struct {
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
 
+type ControlPlaneUpdateStatusConditionType string
+
+const (
+	UpdateProgressing ControlPlaneUpdateStatusConditionType = "UpdateProgressing"
+)
+
 // ControlPlaneUpdateStatus contains a summary and insights related to the control plane update
 type ControlPlaneUpdateStatus struct {
 	// Summary contains a summary of the control plane update, forming an Update Status Controller opinion out of insights
@@ -89,7 +95,7 @@ type ControlPlaneUpdateStatusSummary struct {
 // ControlPlaneUpdateVersions contains the original and target versions of the upgrade
 type ControlPlaneUpdateVersions struct {
 	// Previous is the version of the control plane before the update
-	Previous string `json:"original"`
+	Previous string `json:"previous,omitempty"`
 
 	// IsPreviousPartial is true if the update was initiated in a state where the previous upgrade (to the original version)
 	// was not fully completed
@@ -98,7 +104,7 @@ type ControlPlaneUpdateVersions struct {
 	// Target is the version of the control plane after the update
 	Target string `json:"target"`
 
-	// IsTargetInstall is true if the current work is an installation, not an upgrade
+	// IsTargetInstall is true if the current (or last completed) work is an installation, not an upgrade
 	IsTargetInstall bool `json:"targetInstall,omitempty"`
 }
 
