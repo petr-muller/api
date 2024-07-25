@@ -152,10 +152,19 @@ type UpdateInsight struct {
 	Remediation UpdateInsightRemediation `json:"remediation"`
 }
 
+// +kubebuilder:validation:Enum=ControlPlane;WorkerPool
+type ScopeType string
+
+const (
+	ScopeTypeControlPlane ScopeType = "ControlPlane"
+	ScopeTypeWorkerPool   ScopeType = "WorkerPool"
+)
+
 // UpdateInsightScope is a list of objects involved in the insight
 type UpdateInsightScope struct {
 	// Type is either ControlPlane or WorkerPool
-	Type string `json:"type"`
+	// +kubebuilder:validation:Required
+	Type ScopeType `json:"type"`
 
 	// Resources is a list of resources involved in the insight
 	// +optional
@@ -180,13 +189,50 @@ type ResourceRef struct {
 	Namespace string `json:"namespace,omitempty"`
 }
 
+// +kubebuilder:validation:Enum=info;warning;error;critical
+type InsightImpactLevel string
+
+const (
+	// InfoImpactLevel should be used for insights that are strictly informational or even positive (things go well or
+	// something recently healed)
+	InfoImpactLevel InsightImpactLevel = "info"
+	// WarningImpactLevel should be used for insights that explain a minor or transient problem. Anything that requires
+	// admin attention or manual action should not be a warning but at least an error.
+	WarningImpactLevel InsightImpactLevel = "warning"
+	// ErrorImpactLevel should be used for insights that inform about a problem that requires admin attention. Insights of
+	// level error and higher should be as actionable as possible, and should be accompanied by links to documentation,
+	// KB articles or other resources that help the admin to resolve the problem.
+	ErrorImpactLevel InsightImpactLevel = "error"
+	// CriticalInfoLevel should be used rarely, for insights that inform about a severe problem, threatening with data
+	// loss, destroyed cluster or other catastrophic consequences. Insights of this level should be accompanied by
+	// links to documentation, KB articles or other resources that help the admin to resolve the problem, or at least
+	// prevent the severe consequences from happening.
+	CriticalInfoLevel InsightImpactLevel = "critical"
+)
+
+// +kubebuilder:validation:Enum=None;Unknown;API Availability;Cluster Capacity;Application Availability;Application Outage;Data Loss;Update Speed;Update Stalled
+type InsightImpactType string
+
+const (
+	NoneImpactType                    InsightImpactType = "None"
+	UnknownImpactType                 InsightImpactType = "Unknown"
+	ApiAvailabilityImpactType         InsightImpactType = "API Availability"
+	ClusterCapacityImpactType         InsightImpactType = "Cluster Capacity"
+	ApplicationAvailabilityImpactType InsightImpactType = "Application Availability"
+	ApplicationOutageImpactType       InsightImpactType = "Application Outage"
+	DataLossImpactType                InsightImpactType = "Data Loss"
+	UpdateSpeedImpactType             InsightImpactType = "Update Speed"
+	UpdateStalledImpactType           InsightImpactType = "Update Stalled"
+)
+
+
 // UpdateInsightImpact describes the impact the reported condition has on the cluster or update
 type UpdateInsightImpact struct {
 	// Level is the severity of the impact
-	Level string `json:"level"`
+	Level InsightImpactLevel `json:"level"`
 
 	// Type is the type of the impact
-	Type string `json:"type"`
+	Type InsightImpactType `json:"type"`
 
 	// Summary is a short summary of the impact
 	Summary string `json:"summary"`
