@@ -90,6 +90,33 @@ type ControlPlaneUpdateStatusSummary struct {
 
 	// EstimatedCompletedAt is the estimated time when the update will complete
 	EstimatedCompletedAt metav1.Time `json:"estimatedCompletedAt"`
+
+	// Operators is a list of operators that together form the control plane
+	// +listType=map
+	// +listMapKey=name
+	Operators []OperatorUpdateStatus `json:"operators,omitempty"`
+}
+
+const (
+	OperatorUpdateStatusConditionTypeUpdating string = "Updating"
+	OperatorUpdateStatusConditionTypeHealthy  string = "Healthy"
+
+	OperatorUpdateStatusUpdatingReasonUpdated string = "Updated"
+	OperatorUpdateStatusUpdatingReasonPending string = "Pending"
+
+	OperatorUpdateStatusHealthyReasonUnavailable string = "Unavailable"
+	OperatorUpdateStatusHealthyReasonDegraded    string = "Degraded"
+)
+
+// OperatorUpdateStatus contains update status information for a single operator
+type OperatorUpdateStatus struct {
+	// Name is the name of the operator
+	Name string `json:"name"`
+
+	// Conditions provide details about the operator
+	// +listType=map
+	// +listMapKey=type
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
 
 // ControlPlaneUpdateVersions contains the original and target versions of the upgrade
@@ -230,7 +257,6 @@ const (
 	UpdateSpeedImpactType             InsightImpactType = "Update Speed"
 	UpdateStalledImpactType           InsightImpactType = "Update Stalled"
 )
-
 
 // UpdateInsightImpact describes the impact the reported condition has on the cluster or update
 type UpdateInsightImpact struct {
