@@ -60,6 +60,10 @@ type ControlPlaneUpdateStatus struct {
 	// available to it
 	ControlPlaneUpdateStatusSummary `json:",inline"`
 
+	// Nodes is an optional (HCP control plane does not have nodes) status of a control plane node pool
+	// +optional
+	Nodes *PoolUpdateStatus `json:"nodes,omitempty"`
+
 	// Informers is a list of insight producers, each carries a list of insights
 	// +listType=map
 	// +listMapKey=name
@@ -141,10 +145,51 @@ type PoolUpdateStatus struct {
 	// Resource is the resource that represents the worker pool
 	Resource PoolResourceRef `json:",inline"`
 
+	// Nodes is a list of nodes in the worker pool
+	// +optional
+	Nodes []NodeUpdateStatus `json:"nodes,omitempty"`
+
 	// Informers is a list of insight producers, each carries a list of insights
 	// +listType=map
 	// +listMapKey=name
 	Informers []UpdateInformer `json:"informers,omitempty"`
+
+	// Conditions provides details about the control plane update
+	// +listType=map
+	// +listMapKey=type
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
+
+const (
+	NodeUpdateStatusConditionTypeUpdating  string = "Updating"
+	NodeUpdateStatusConditionTypeDegraded  string = "Degraded"
+	NodeUpdateStatusConditionTypeAvailable string = "Available"
+
+	// Updating=True reasons
+
+	NodeUpdateStatusUpdatingReasonDraining  string = "Draining"
+	NodeUpdateStatusUpdatingReasonUpdating  string = "Updating"
+	NodeUpdateStatusUpdatingReasonRebooting string = "Rebooting"
+
+	// Updating=False reasons
+
+	NodeUpdateStatusUpdatingReasonPaused    string = "Paused"
+	NodeUpdateStatusUpdatingReasonPending   string = "Pending"
+	NodeUpdateStatusUpdatingReasonCompleted string = "Completed"
+)
+
+// NodeUpdateStatus ...
+type NodeUpdateStatus struct {
+	Resource ResourceRef `json:",inline"`
+
+	// Version is the version of the node, when known
+	Version string `json:"version,omitempty"`
+
+	// EstToComplete is the estimated time to complete the update, when known
+	EstToComplete metav1.Duration `json:"estToComplete,omitempty"`
+
+	// Message is a human-readable message about the node update status
+	Message string `json:"message,omitempty"`
 
 	// Conditions provides details about the control plane update
 	// +listType=map
