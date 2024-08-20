@@ -62,7 +62,7 @@ type ControlPlaneUpdateStatus struct {
 
 	// Nodes is an optional (HCP control plane does not have nodes) status of a control plane node pool
 	// +optional
-	Nodes *PoolUpdateStatus `json:"nodes,omitempty"`
+	Nodes *PoolUpdateStatus `json:"nodePool,omitempty"`
 
 	// Informers is a list of insight producers, each carries a list of insights
 	// +listType=map
@@ -143,7 +143,7 @@ type ControlPlaneUpdateVersions struct {
 // Worker pool is represented by a resource
 type PoolUpdateStatus struct {
 	// Resource is the resource that represents the worker pool
-	Resource PoolResourceRef `json:",inline"`
+	Resource PoolResourceRef `json:"resource"`
 
 	// Nodes is a list of nodes in the worker pool
 	// +optional
@@ -180,7 +180,7 @@ const (
 
 // NodeUpdateStatus ...
 type NodeUpdateStatus struct {
-	Resource ResourceRef `json:",inline"`
+	Resource ResourceRef `json:"resource"`
 
 	// Version is the version of the node, when known
 	Version string `json:"version,omitempty"`
