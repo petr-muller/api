@@ -48,148 +48,12 @@ type UpdateStatusStatus struct {
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
 
-type ControlPlaneUpdateStatusConditionType string
-
-const (
-	UpdateProgressing ControlPlaneUpdateStatusConditionType = "UpdateProgressing"
-)
-
 // ControlPlaneUpdateStatus contains a summary and insights related to the control plane update
 type ControlPlaneUpdateStatus struct {
-	// Summary contains a summary of the control plane update, forming an Update Status Controller opinion out of insights
-	// available to it
-	ControlPlaneUpdateStatusSummary `json:",inline"`
-
-	// Nodes is an optional (HCP control plane does not have nodes) status of a control plane node pool
-	// +optional
-	Nodes *PoolUpdateStatus `json:"nodePool,omitempty"`
-
 	// Informers is a list of insight producers, each carries a list of insights
 	// +listType=map
 	// +listMapKey=name
 	Informers []UpdateInformer `json:"informers,omitempty"`
-
-	// Conditions provides details about the control plane update
-	// +listType=map
-	// +listMapKey=type
-	Conditions []metav1.Condition `json:"conditions,omitempty"`
-}
-
-// ControlPlaneUpdateStatusSummary contains a summary of the control plane update
-type ControlPlaneUpdateStatusSummary struct {
-	// Assessment summarizes a high-level status of the update
-	Assessment string `json:"assessment"`
-
-	// Versions contains the original and target versions of the upgrade
-	Versions ControlPlaneUpdateVersions `json:"versions"`
-
-	// Completion is a percentage of the update completion (0-100)
-	Completion int32 `json:"completion"`
-
-	// StartedAt is the time when the update started
-	StartedAt metav1.Time `json:"startedAt"`
-
-	// CompletedAt is the time when the update completed
-	CompletedAt metav1.Time `json:"completedAt"`
-
-	// EstimatedCompletedAt is the estimated time when the update will complete
-	EstimatedCompletedAt metav1.Time `json:"estimatedCompletedAt"`
-
-	// Operators is a list of operators that together form the control plane
-	// +listType=map
-	// +listMapKey=name
-	Operators []OperatorUpdateStatus `json:"operators,omitempty"`
-}
-
-const (
-	OperatorUpdateStatusConditionTypeUpdating string = "Updating"
-	OperatorUpdateStatusConditionTypeHealthy  string = "Healthy"
-
-	OperatorUpdateStatusUpdatingReasonUpdated string = "Updated"
-	OperatorUpdateStatusUpdatingReasonPending string = "Pending"
-
-	OperatorUpdateStatusHealthyReasonUnavailable string = "Unavailable"
-	OperatorUpdateStatusHealthyReasonDegraded    string = "Degraded"
-)
-
-// OperatorUpdateStatus contains update status information for a single operator
-type OperatorUpdateStatus struct {
-	// Name is the name of the operator
-	Name string `json:"name"`
-
-	// Conditions provide details about the operator
-	// +listType=map
-	// +listMapKey=type
-	Conditions []metav1.Condition `json:"conditions,omitempty"`
-}
-
-// ControlPlaneUpdateVersions contains the original and target versions of the upgrade
-type ControlPlaneUpdateVersions struct {
-	// Previous is the version of the control plane before the update
-	Previous string `json:"previous,omitempty"`
-
-	// IsPreviousPartial is true if the update was initiated in a state where the previous upgrade (to the original version)
-	// was not fully completed
-	IsPreviousPartial bool `json:"previousPartial,omitempty"`
-
-	// Target is the version of the control plane after the update
-	Target string `json:"target"`
-
-	// IsTargetInstall is true if the current (or last completed) work is an installation, not an upgrade
-	IsTargetInstall bool `json:"targetInstall,omitempty"`
-}
-
-// PoolUpdateStatus contains a summary and insights related to a worker pool update
-// Worker pool is represented by a resource
-type PoolUpdateStatus struct {
-	// Resource is the resource that represents the worker pool
-	Resource PoolResourceRef `json:"resource"`
-
-	// Nodes is a list of nodes in the worker pool
-	// +optional
-	Nodes []NodeUpdateStatus `json:"nodes,omitempty"`
-
-	// Informers is a list of insight producers, each carries a list of insights
-	// +listType=map
-	// +listMapKey=name
-	Informers []UpdateInformer `json:"informers,omitempty"`
-
-	// Conditions provides details about the control plane update
-	// +listType=map
-	// +listMapKey=type
-	Conditions []metav1.Condition `json:"conditions,omitempty"`
-}
-
-const (
-	NodeUpdateStatusConditionTypeUpdating  string = "Updating"
-	NodeUpdateStatusConditionTypeDegraded  string = "Degraded"
-	NodeUpdateStatusConditionTypeAvailable string = "Available"
-
-	// Updating=True reasons
-
-	NodeUpdateStatusUpdatingReasonDraining  string = "Draining"
-	NodeUpdateStatusUpdatingReasonUpdating  string = "Updating"
-	NodeUpdateStatusUpdatingReasonRebooting string = "Rebooting"
-
-	// Updating=False reasons
-
-	NodeUpdateStatusUpdatingReasonPaused    string = "Paused"
-	NodeUpdateStatusUpdatingReasonPending   string = "Pending"
-	NodeUpdateStatusUpdatingReasonCompleted string = "Completed"
-)
-
-// NodeUpdateStatus ...
-type NodeUpdateStatus struct {
-	Resource ResourceRef `json:"resource"`
-
-	// Version is the version of the node, when known
-	Version string `json:"version,omitempty"`
-
-	// EstToComplete is the estimated time to complete the update, when known
-	EstToComplete metav1.Duration `json:"estToComplete,omitempty"`
-
-	// Message is a human-readable message about the node update status
-	Message string `json:"message,omitempty"`
 
 	// Conditions provides details about the control plane update
 	// +listType=map
@@ -208,14 +72,255 @@ type UpdateInformer struct {
 	Insights []UpdateInsight `json:"insights,omitempty"`
 }
 
-// UpdateInsight is a piece of information produced by an insight producer
+type ControlPlaneUpdateAssessment string
+
+type ClusterVersionStatusInsightConditionType string
+
+const (
+	ClusterVersionStatusInsightConditionTypeUpdating ClusterVersionStatusInsightConditionType = "Updating"
+)
+
+// ControlPlaneUpdateVersions contains the original and target versions of the upgrade
+type ControlPlaneUpdateVersions struct {
+	// Previous is the version of the control plane before the update
+	Previous string `json:"previous,omitempty"`
+
+	// IsPreviousPartial is true if the update was initiated in a state where the previous upgrade (to the original version)
+	// was not fully completed
+	IsPreviousPartial bool `json:"previousPartial,omitempty"`
+
+	// Target is the version of the control plane after the update
+	Target string `json:"target"`
+
+	// IsTargetInstall is true if the current (or last completed) work is an installation, not an upgrade
+	IsTargetInstall bool `json:"targetInstall,omitempty"`
+}
+
+type ClusterVersionStatusInsight struct {
+	// Resource is the ClusterVersion resource that represents the control plane
+	Resource ResourceRef `json:"resource"`
+
+	// Assessment is the assessment of the control plane update process
+	Assessment ControlPlaneUpdateAssessment `json:"assessment"`
+
+	// Versions contains the original and target versions of the upgrade
+	Versions ControlPlaneUpdateVersions `json:"versions"`
+
+	// Completion is a percentage of the update completion (0-100)
+	Completion int32 `json:"completion"`
+
+	// StartedAt is the time when the update started
+	StartedAt metav1.Time `json:"startedAt"`
+
+	// CompletedAt is the time when the update completed
+	CompletedAt metav1.Time `json:"completedAt"`
+
+	// EstimatedCompletedAt is the estimated time when the update will complete
+	EstimatedCompletedAt metav1.Time `json:"estimatedCompletedAt"`
+
+	// Conditions provides details about the control plane update
+	// +listType=map
+	// +listMapKey=type
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
+type ClusterOperatorStatusInsightConditionType string
+
+const (
+	ClusterOperatorStatusInsightConditionTypeUpdating ClusterOperatorStatusInsightConditionType = "Updating"
+	ClusterOperatorStatusInsightConditionTypeHealthy  ClusterOperatorStatusInsightConditionType = "Healthy"
+)
+
+type ClusterOperatorStatusInsightUpdatingReason string
+
+const (
+	ClusterOperatorStatusInsightUpdatingReasonUpdated ClusterOperatorStatusInsightUpdatingReason = "Updated"
+	ClusterOperatorStatusInsightUpdatingReasonPending ClusterOperatorStatusInsightUpdatingReason = "Pending"
+)
+
+type ClusterOperatorStatusInsightHealthyReason string
+
+const (
+	OperatorUpdateStatusInsightHealthyReasonUnavailable ClusterOperatorStatusInsightHealthyReason = "Unavailable"
+	OperatorUpdateStatusInsightHealthyReasonDegraded    ClusterOperatorStatusInsightHealthyReason = "Degraded"
+)
+
+type ClusterOperatorStatusInsight struct {
+	// Name is the name of the operator
+	Name string `json:"name"`
+
+	// Resource is the ClusterOperator resource that represents the operator
+	Resource ResourceRef `json:"resource"`
+
+	// Conditions provide details about the operator
+	// +listType=map
+	// +listMapKey=type
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
+
+// PoolUpdateStatus contains a summary and insights related to a node pool update
+type PoolUpdateStatus struct {
+	// Name is the name of the pool
+	Name string `json:"name"`
+
+	// Resource is the resource that represents the pool
+	Resource ResourceRef `json:"resource"`
+
+	// Informers is a list of insight producers, each carries a list of insights
+	// +listType=map
+	// +listMapKey=name
+	Informers []UpdateInformer `json:"informers,omitempty"`
+
+	// Conditions provide details about the pool
+}
+
+type PoolUpdateAssessment string
+
+const (
+	PoolUpdateAssessmentPending PoolUpdateAssessment = "Pending"
+)
+
+type PoolNodesSummaryType string
+
+const (
+	PoolNodesSummaryTypeTotal       PoolNodesSummaryType = "Total"
+	PoolNodesSummaryTypeAvailable   PoolNodesSummaryType = "Available"
+	PoolNodesSummaryTypeProgressing PoolNodesSummaryType = "Progressing"
+	PoolNodesSummaryTypeOutdated    PoolNodesSummaryType = "Outdated"
+	PoolNodesSummaryTypeDraining    PoolNodesSummaryType = "Draining"
+	PoolNodesSummaryTypeExcluded    PoolNodesSummaryType = "Excluded"
+	PoolNodesSummaryTypeDegraded    PoolNodesSummaryType = "Degraded"
+)
+
+type PoolNodesUpdateSummary struct {
+	// Type is the type of the summary
+	Type string `json:"type"`
+
+	// Count is the number of nodes matching the criteria
+	Count int32 `json:"count"`
+}
+
+type MachineConfigPoolStatusInsight struct {
+	// Name is the name of the machine config pool
+	Name string `json:"name"`
+
+	// Resource is the MachineConfigPool resource that represents the pool
+	Resource ResourceRef `json:"resource"`
+
+	// Scope describes whether the pool is a control plane or a worker pool
+	Scope ScopeType `json:"scopeType"`
+
+	// Assessment is the assessment of the machine config pool update process
+	Assessment PoolUpdateAssessment `json:"assessment"`
+
+	// Completion is a percentage of the update completion (0-100)
+	Completion int32 `json:"completion"`
+
+	// Summaries is a list of counts of nodes matching certain criteria (e.g. updated, degraded, etc.)
+	// +listType=map
+	// +listMapKey=type
+	Summaries []PoolNodesUpdateSummary `json:"summaries,omitempty"`
+
+	// Conditions provide details about the machine config pool
+	// +listType=map
+	// +listMapKey=type
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
+
+type NodeStatusInsightConditionType string
+
+const (
+	NodeStatusInsightConditionTypeUpdating  NodeStatusInsightConditionType = "Updating"
+	NodeStatusInsightConditionTypeDegraded  NodeStatusInsightConditionType = "Degraded"
+	NodeStatusInsightConditionTypeAvailable NodeStatusInsightConditionType = "Available"
+)
+
+type NodeStatusInsightUpdatingReason string
+
+const (
+	// Updating=True reasons
+
+	NodeStatusInsightUpdatingReasonDraining  NodeStatusInsightUpdatingReason = "Draining"
+	NodeStatusInsightUpdatingReasonUpdating  NodeStatusInsightUpdatingReason = "Updating"
+	NodeStatusInsightUpdatingReasonRebooting NodeStatusInsightUpdatingReason = "Rebooting"
+
+	// Updating=False reasons
+
+	NodeStatusInsightUpdatingReasonPaused    NodeStatusInsightUpdatingReason = "Paused"
+	NodeStatusInsightUpdatingReasonPending   NodeStatusInsightUpdatingReason = "Pending"
+	NodeStatusInsightUpdatingReasonCompleted NodeStatusInsightUpdatingReason = "Completed"
+)
+
+type NodeStatusInsight struct {
+	// Name is the name of the node
+	Name string `json:"name"`
+
+	// Resource is the Node resource that represents the node
+	Resource ResourceRef `json:"resource"`
+
+	// Version is the version of the node, when known
+	Version string `json:"version,omitempty"`
+
+	// EstToComplete is the estimated time to complete the update, when known
+	EstToComplete metav1.Duration `json:"estToComplete,omitempty"`
+
+	// Message is a human-readable message about the node update status
+	Message string `json:"message,omitempty"`
+
+	// Conditions provides details about the control plane update
+	// +listType=map
+	// +listMapKey=type
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
+
+type UpdateInsightType string
+
+const (
+	UpdateInsightTypeClusterVersionStatusInsight    UpdateInsightType = "ClusterVersion"
+	UpdateInsightTypeClusterOperatorStatusInsight   UpdateInsightType = "ClusterOperator"
+	UpdateInsightTypeMachineConfigPoolStatusInsight UpdateInsightType = "MachineConfigPool"
+	UpdateInsightTypeNodeStatusInsight              UpdateInsightType = "Node"
+	UpdateInsightTypeUpdateHealthInsight            UpdateInsightType = "UpdateHealth"
+)
+
 type UpdateInsight struct {
+	// +unionDiscriminator
+	Type UpdateInsightType `json:"type"`
+
 	// UID identifies an insight over time
 	UID string `json:"uid"`
 
 	// AcquiredAt is the time when the data was acquired by the producer
 	AcquiredAt metav1.Time `json:"acquisitionTime"`
 
+	// ClusterVersionStatusInsight is a status insight about the state of a control plane update, where
+	// the control plane is represented by a ClusterVersion resource usually managed by CVO
+	// +optional
+	ClusterVersionStatusInsight *ClusterVersionStatusInsight `json:"cv,omitempty"`
+
+	// ClusterOperatorStatusInsight is a status insight about the state of a control plane cluster operator update
+	// represented by a ClusterOperator resource
+	// +optional
+	ClusterOperatorStatusInsight *ClusterOperatorStatusInsight `json:"co,omitempty"`
+
+	// MachineConfigPoolStatusInsight is a status insight about the state of a worker pool update, where the worker pool
+	// is represented by a MachineConfigPool resource
+	// +optional
+	MachineConfigPoolStatusInsight *MachineConfigPoolStatusInsight `json:"mcp,omitempty"`
+
+	// NodeStatusInsight is a status insight about the state of a worker node update, where the worker node is represented
+	// by a Node resource
+	// +optional
+	NodeStatusInsight *NodeStatusInsight `json:"node,omitempty"`
+
+	// UpdateHealthInsight is a generic health insight about the update. It does not represent a status of any specific
+	// resource but surfaces actionable information about the health of the cluster or an update
+	// +optional
+	UpdateHealthInsight *UpdateHealthInsight `json:"health,omitempty"`
+}
+
+// UpdateHealthInsight is a piece of actionable information produced by an insight producer about the health
+// of the cluster or an update
+type UpdateHealthInsight struct {
 	// StartedAt is the time when the condition reported by the insight started
 	StartedAt metav1.Time `json:"startedAt"`
 
@@ -230,6 +335,7 @@ type UpdateInsight struct {
 	Remediation UpdateInsightRemediation `json:"remediation"`
 }
 
+// ScopeType is one of ControlPlane or WorkerPool
 // +kubebuilder:validation:Enum=ControlPlane;WorkerPool
 type ScopeType string
 
@@ -267,6 +373,7 @@ type ResourceRef struct {
 	Namespace string `json:"namespace,omitempty"`
 }
 
+// InsightImpactLevel describes the severity of the impact the reported condition has on the cluster or update
 // +kubebuilder:validation:Enum=info;warning;error;critical
 type InsightImpactLevel string
 
@@ -288,6 +395,7 @@ const (
 	CriticalInfoLevel InsightImpactLevel = "critical"
 )
 
+// InsightImpactType describes the type of the impact the reported condition has on the cluster or update
 // +kubebuilder:validation:Enum=None;Unknown;API Availability;Cluster Capacity;Application Availability;Application Outage;Data Loss;Update Speed;Update Stalled
 type InsightImpactType string
 
