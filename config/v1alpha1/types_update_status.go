@@ -48,6 +48,21 @@ type UpdateStatusStatus struct {
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
 
+type ControlPlaneConditionType string
+
+const (
+	ControlPlaneConditionTypeUpdating ControlPlaneConditionType = "Updating"
+)
+
+type ControlPlaneConditionUpdatingReason string
+
+const (
+	ControlPlaneConditionUpdatingReasonClusterVersionProgressing        ControlPlaneConditionUpdatingReason = "ClusterVersionProgressing"
+	ControlPlaneConditionUpdatingReasonClusterVersionNotProgressing     ControlPlaneConditionUpdatingReason = "ClusterVersionNotProgressing"
+	ControlPlaneConditionUpdatingReasonClusterVersionProgressingUnknown ControlPlaneConditionUpdatingReason = "ClusterVersionProgressingUnknown"
+	ControlPlaneConditionUpdatingReasonClusterVersionWithoutProgressing ControlPlaneConditionUpdatingReason = "ClusterVersionWithoutProgressing"
+)
+
 // ControlPlaneUpdateStatus contains a summary and insights related to the control plane update
 type ControlPlaneUpdateStatus struct {
 	// Informers is a list of insight producers, each carries a list of insights
@@ -74,10 +89,22 @@ type UpdateInformer struct {
 
 type ControlPlaneUpdateAssessment string
 
+const (
+	ControlPlaneUpdateAssessmentProgressing ControlPlaneUpdateAssessment = "Progressing"
+	ControlPlaneUpdateAssessmentCompleted   ControlPlaneUpdateAssessment = "Completed"
+	ControlPlaneUpdateAssessmentDegraded    ControlPlaneUpdateAssessment = "Degraded"
+)
+
 type ClusterVersionStatusInsightConditionType string
 
 const (
 	ClusterVersionStatusInsightConditionTypeUpdating ClusterVersionStatusInsightConditionType = "Updating"
+)
+
+type ClusterVersionStatusInsightUpdatingReason string
+
+const (
+	ClusterVersionStatusInsightUpdatingReasonNoProgressing ClusterVersionStatusInsightUpdatingReason = "MissingProgressingCondition"
 )
 
 // ControlPlaneUpdateVersions contains the original and target versions of the upgrade
