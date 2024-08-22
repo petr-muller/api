@@ -220,6 +220,8 @@ const (
 
 type PoolNodesUpdateSummary struct {
 	// Type is the type of the summary
+	// +required
+	// +kubebuilder:validation:Required
 	Type string `json:"type"`
 
 	// Count is the number of nodes matching the criteria
