@@ -405,6 +405,10 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/openshift/api/config/v1alpha1.ClusterImagePolicyList":                                    schema_openshift_api_config_v1alpha1_ClusterImagePolicyList(ref),
 		"github.com/openshift/api/config/v1alpha1.ClusterImagePolicySpec":                                    schema_openshift_api_config_v1alpha1_ClusterImagePolicySpec(ref),
 		"github.com/openshift/api/config/v1alpha1.ClusterImagePolicyStatus":                                  schema_openshift_api_config_v1alpha1_ClusterImagePolicyStatus(ref),
+		"github.com/openshift/api/config/v1alpha1.ClusterOperatorStatusInsight":                              schema_openshift_api_config_v1alpha1_ClusterOperatorStatusInsight(ref),
+		"github.com/openshift/api/config/v1alpha1.ClusterVersionStatusInsight":                               schema_openshift_api_config_v1alpha1_ClusterVersionStatusInsight(ref),
+		"github.com/openshift/api/config/v1alpha1.ControlPlaneUpdateStatus":                                  schema_openshift_api_config_v1alpha1_ControlPlaneUpdateStatus(ref),
+		"github.com/openshift/api/config/v1alpha1.ControlPlaneUpdateVersions":                                schema_openshift_api_config_v1alpha1_ControlPlaneUpdateVersions(ref),
 		"github.com/openshift/api/config/v1alpha1.EtcdBackupSpec":                                            schema_openshift_api_config_v1alpha1_EtcdBackupSpec(ref),
 		"github.com/openshift/api/config/v1alpha1.FulcioCAWithRekor":                                         schema_openshift_api_config_v1alpha1_FulcioCAWithRekor(ref),
 		"github.com/openshift/api/config/v1alpha1.GatherConfig":                                              schema_openshift_api_config_v1alpha1_GatherConfig(ref),
@@ -416,16 +420,32 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/openshift/api/config/v1alpha1.InsightsDataGatherList":                                    schema_openshift_api_config_v1alpha1_InsightsDataGatherList(ref),
 		"github.com/openshift/api/config/v1alpha1.InsightsDataGatherSpec":                                    schema_openshift_api_config_v1alpha1_InsightsDataGatherSpec(ref),
 		"github.com/openshift/api/config/v1alpha1.InsightsDataGatherStatus":                                  schema_openshift_api_config_v1alpha1_InsightsDataGatherStatus(ref),
+		"github.com/openshift/api/config/v1alpha1.MachineConfigPoolStatusInsight":                            schema_openshift_api_config_v1alpha1_MachineConfigPoolStatusInsight(ref),
+		"github.com/openshift/api/config/v1alpha1.NodeStatusInsight":                                         schema_openshift_api_config_v1alpha1_NodeStatusInsight(ref),
 		"github.com/openshift/api/config/v1alpha1.Policy":                                                    schema_openshift_api_config_v1alpha1_Policy(ref),
 		"github.com/openshift/api/config/v1alpha1.PolicyFulcioSubject":                                       schema_openshift_api_config_v1alpha1_PolicyFulcioSubject(ref),
 		"github.com/openshift/api/config/v1alpha1.PolicyIdentity":                                            schema_openshift_api_config_v1alpha1_PolicyIdentity(ref),
 		"github.com/openshift/api/config/v1alpha1.PolicyMatchExactRepository":                                schema_openshift_api_config_v1alpha1_PolicyMatchExactRepository(ref),
 		"github.com/openshift/api/config/v1alpha1.PolicyMatchRemapIdentity":                                  schema_openshift_api_config_v1alpha1_PolicyMatchRemapIdentity(ref),
 		"github.com/openshift/api/config/v1alpha1.PolicyRootOfTrust":                                         schema_openshift_api_config_v1alpha1_PolicyRootOfTrust(ref),
+		"github.com/openshift/api/config/v1alpha1.PoolNodesUpdateSummary":                                    schema_openshift_api_config_v1alpha1_PoolNodesUpdateSummary(ref),
+		"github.com/openshift/api/config/v1alpha1.PoolResourceRef":                                           schema_openshift_api_config_v1alpha1_PoolResourceRef(ref),
+		"github.com/openshift/api/config/v1alpha1.PoolUpdateStatus":                                          schema_openshift_api_config_v1alpha1_PoolUpdateStatus(ref),
 		"github.com/openshift/api/config/v1alpha1.PublicKey":                                                 schema_openshift_api_config_v1alpha1_PublicKey(ref),
+		"github.com/openshift/api/config/v1alpha1.ResourceRef":                                               schema_openshift_api_config_v1alpha1_ResourceRef(ref),
 		"github.com/openshift/api/config/v1alpha1.RetentionNumberConfig":                                     schema_openshift_api_config_v1alpha1_RetentionNumberConfig(ref),
 		"github.com/openshift/api/config/v1alpha1.RetentionPolicy":                                           schema_openshift_api_config_v1alpha1_RetentionPolicy(ref),
 		"github.com/openshift/api/config/v1alpha1.RetentionSizeConfig":                                       schema_openshift_api_config_v1alpha1_RetentionSizeConfig(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateHealthInsight":                                       schema_openshift_api_config_v1alpha1_UpdateHealthInsight(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateInformer":                                            schema_openshift_api_config_v1alpha1_UpdateInformer(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateInsight":                                             schema_openshift_api_config_v1alpha1_UpdateInsight(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateInsightImpact":                                       schema_openshift_api_config_v1alpha1_UpdateInsightImpact(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateInsightRemediation":                                  schema_openshift_api_config_v1alpha1_UpdateInsightRemediation(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateInsightScope":                                        schema_openshift_api_config_v1alpha1_UpdateInsightScope(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateStatus":                                              schema_openshift_api_config_v1alpha1_UpdateStatus(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateStatusList":                                          schema_openshift_api_config_v1alpha1_UpdateStatusList(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateStatusSpec":                                          schema_openshift_api_config_v1alpha1_UpdateStatusSpec(ref),
+		"github.com/openshift/api/config/v1alpha1.UpdateStatusStatus":                                        schema_openshift_api_config_v1alpha1_UpdateStatusStatus(ref),
 		"github.com/openshift/api/console/v1.ApplicationMenuSpec":                                            schema_openshift_api_console_v1_ApplicationMenuSpec(ref),
 		"github.com/openshift/api/console/v1.CLIDownloadLink":                                                schema_openshift_api_console_v1_CLIDownloadLink(ref),
 		"github.com/openshift/api/console/v1.ConsoleCLIDownload":                                             schema_openshift_api_console_v1_ConsoleCLIDownload(ref),
@@ -20226,6 +20246,248 @@ func schema_openshift_api_config_v1alpha1_ClusterImagePolicyStatus(ref common.Re
 	}
 }
 
+func schema_openshift_api_config_v1alpha1_ClusterOperatorStatusInsight(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the operator",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the ClusterOperator resource that represents the operator",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ResourceRef"),
+						},
+					},
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions provide details about the operator",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "resource"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.ResourceRef", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_ClusterVersionStatusInsight(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the ClusterVersion resource that represents the control plane",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ResourceRef"),
+						},
+					},
+					"assessment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Assessment is the assessment of the control plane update process",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"versions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Versions contains the original and target versions of the upgrade",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ControlPlaneUpdateVersions"),
+						},
+					},
+					"completion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Completion is a percentage of the update completion (0-100)",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"startedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StartedAt is the time when the update started",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"completedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CompletedAt is the time when the update completed",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"estimatedCompletedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EstimatedCompletedAt is the estimated time when the update will complete",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions provides details about the control plane update",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"resource", "assessment", "versions", "completion", "startedAt", "completedAt", "estimatedCompletedAt"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.ControlPlaneUpdateVersions", "github.com/openshift/api/config/v1alpha1.ResourceRef", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_ControlPlaneUpdateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ControlPlaneUpdateStatus contains a summary and insights related to the control plane update",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"informers": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"name",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Informers is a list of insight producers, each carries a list of insights",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/config/v1alpha1.UpdateInformer"),
+									},
+								},
+							},
+						},
+					},
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions provides details about the control plane update",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.UpdateInformer", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_ControlPlaneUpdateVersions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ControlPlaneUpdateVersions contains the original and target versions of the upgrade",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"previous": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Previous is the version of the control plane before the update",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"previousPartial": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IsPreviousPartial is true if the update was initiated in a state where the previous upgrade (to the original version) was not fully completed",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"target": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Target is the version of the control plane after the update",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"targetInstall": {
+						SchemaProps: spec.SchemaProps{
+							Description: "IsTargetInstall is true if the current (or last completed) work is an installation, not an upgrade",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"target"},
+			},
+		},
+	}
+}
+
 func schema_openshift_api_config_v1alpha1_EtcdBackupSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -20656,6 +20918,183 @@ func schema_openshift_api_config_v1alpha1_InsightsDataGatherStatus(ref common.Re
 	}
 }
 
+func schema_openshift_api_config_v1alpha1_MachineConfigPoolStatusInsight(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the machine config pool",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the MachineConfigPool resource that represents the pool",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ResourceRef"),
+						},
+					},
+					"scopeType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Scope describes whether the pool is a control plane or a worker pool",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"assessment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Assessment is the assessment of the machine config pool update process",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"completion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Completion is a percentage of the update completion (0-100)",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"summaries": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Summaries is a list of counts of nodes matching certain criteria (e.g. updated, degraded, etc.)",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/config/v1alpha1.PoolNodesUpdateSummary"),
+									},
+								},
+							},
+						},
+					},
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions provide details about the machine config pool",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "resource", "scopeType", "assessment", "completion"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.PoolNodesUpdateSummary", "github.com/openshift/api/config/v1alpha1.ResourceRef", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_NodeStatusInsight(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the node",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the Node resource that represents the node",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ResourceRef"),
+						},
+					},
+					"poolResource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "PoolResource is the resource that represents the pool the node is a member of",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.PoolResourceRef"),
+						},
+					},
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version is the version of the node, when known",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"estToComplete": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EstToComplete is the estimated time to complete the update, when known",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Duration"),
+						},
+					},
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Message is a human-readable message about the node update status",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions provides details about the control plane update",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "resource", "poolResource"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.PoolResourceRef", "github.com/openshift/api/config/v1alpha1.ResourceRef", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
+	}
+}
+
 func schema_openshift_api_config_v1alpha1_Policy(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -20864,6 +21303,132 @@ func schema_openshift_api_config_v1alpha1_PolicyRootOfTrust(ref common.Reference
 	}
 }
 
+func schema_openshift_api_config_v1alpha1_PoolNodesUpdateSummary(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type is the type of the summary",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"count": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Count is the number of nodes matching the criteria",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+				},
+				Required: []string{"type", "count"},
+			},
+		},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_PoolResourceRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PoolResourceRef is a reference to a kubernetes resource that represents a worker pool",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind of object being referenced",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIGroup of the object being referenced",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the object being referenced",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace of the object being referenced, if any",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"kind", "name"},
+			},
+		},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_PoolUpdateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "PoolUpdateStatus contains a summary and insights related to a node pool update",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the pool",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource is the resource that represents the pool",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.PoolResourceRef"),
+						},
+					},
+					"informers": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"name",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Informers is a list of insight producers, each carries a list of insights",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/config/v1alpha1.UpdateInformer"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name", "resource"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.PoolResourceRef", "github.com/openshift/api/config/v1alpha1.UpdateInformer"},
+	}
+}
+
 func schema_openshift_api_config_v1alpha1_PublicKey(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -20887,6 +21452,50 @@ func schema_openshift_api_config_v1alpha1_PublicKey(ref common.ReferenceCallback
 					},
 				},
 				Required: []string{"keyData"},
+			},
+		},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_ResourceRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceRef is a reference to a kubernetes resource, typically involved in an insight",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind of object being referenced",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIGroup of the object being referenced",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the object being referenced",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace of the object being referenced, if any",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"kind", "name"},
 			},
 		},
 	}
@@ -20979,6 +21588,437 @@ func schema_openshift_api_config_v1alpha1_RetentionSizeConfig(ref common.Referen
 				},
 			},
 		},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateHealthInsight(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateHealthInsight is a piece of actionable information produced by an insight producer about the health of the cluster or an update",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"startedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "StartedAt is the time when the condition reported by the insight started",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"scope": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Scope is list of objects involved in the insight",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.UpdateInsightScope"),
+						},
+					},
+					"impact": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Impact describes the impact the reported condition has on the cluster or update",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.UpdateInsightImpact"),
+						},
+					},
+					"remediation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Remediation contains ... TODO",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.UpdateInsightRemediation"),
+						},
+					},
+				},
+				Required: []string{"startedAt", "impact", "remediation"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.UpdateInsightImpact", "github.com/openshift/api/config/v1alpha1.UpdateInsightRemediation", "github.com/openshift/api/config/v1alpha1.UpdateInsightScope", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateInformer(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateInformer is an insight producer identified by a name, carrying a list of insights it produced",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name is the name of the insight producer",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"insights": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Insights is a list of insights produced by this producer",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/config/v1alpha1.UpdateInsight"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.UpdateInsight"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateInsight(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"uid": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UID identifies an insight over time",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"acquisitionTime": {
+						SchemaProps: spec.SchemaProps{
+							Description: "AcquiredAt is the time when the data was acquired by the producer",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"cv": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterVersionStatusInsight is a status insight about the state of a control plane update, where the control plane is represented by a ClusterVersion resource usually managed by CVO",
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ClusterVersionStatusInsight"),
+						},
+					},
+					"co": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ClusterOperatorStatusInsight is a status insight about the state of a control plane cluster operator update represented by a ClusterOperator resource",
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ClusterOperatorStatusInsight"),
+						},
+					},
+					"mcp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "MachineConfigPoolStatusInsight is a status insight about the state of a worker pool update, where the worker pool is represented by a MachineConfigPool resource",
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.MachineConfigPoolStatusInsight"),
+						},
+					},
+					"node": {
+						SchemaProps: spec.SchemaProps{
+							Description: "NodeStatusInsight is a status insight about the state of a worker node update, where the worker node is represented by a Node resource",
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.NodeStatusInsight"),
+						},
+					},
+					"health": {
+						SchemaProps: spec.SchemaProps{
+							Description: "UpdateHealthInsight is a generic health insight about the update. It does not represent a status of any specific resource but surfaces actionable information about the health of the cluster or an update",
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.UpdateHealthInsight"),
+						},
+					},
+				},
+				Required: []string{"type", "uid", "acquisitionTime"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.ClusterOperatorStatusInsight", "github.com/openshift/api/config/v1alpha1.ClusterVersionStatusInsight", "github.com/openshift/api/config/v1alpha1.MachineConfigPoolStatusInsight", "github.com/openshift/api/config/v1alpha1.NodeStatusInsight", "github.com/openshift/api/config/v1alpha1.UpdateHealthInsight", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateInsightImpact(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateInsightImpact describes the impact the reported condition has on the cluster or update",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"level": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Level is the severity of the impact",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type is the type of the impact",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"summary": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Summary is a short summary of the impact",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"description": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Description is a human-oriented description of the condition reported by the insight",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"level", "type", "summary", "description"},
+			},
+		},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateInsightRemediation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateInsightRemediation contains ... TODO",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"reference": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reference is a URL where administrators can find information to resolve or prevent the reported condition",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"estimatedFinish": {
+						SchemaProps: spec.SchemaProps{
+							Description: "EstimatedFinish is the estimated time when the informer expects the condition to be resolved, if applicable. This should normally only be provided by system level insights (impact level=status)",
+							Default:     map[string]interface{}{},
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+				},
+				Required: []string{"reference", "estimatedFinish"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateInsightScope(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateInsightScope is a list of objects involved in the insight",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Type is either ControlPlane or WorkerPool",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resources is a list of resources involved in the insight",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/config/v1alpha1.ResourceRef"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"type"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.ResourceRef"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateStatus is the API about in-progress updates, kept populated by Update Status Controller by aggregating and summarizing UpdateInformers\n\nCompatibility level 4: No compatibility is provided, the API can change at any point for any reason. These capabilities should not be used by applications needing long term support.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/openshift/api/config/v1alpha1.UpdateStatusSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/openshift/api/config/v1alpha1.UpdateStatusStatus"),
+						},
+					},
+				},
+				Required: []string{"spec"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.UpdateStatusSpec", "github.com/openshift/api/config/v1alpha1.UpdateStatusStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateStatusList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateStatusList is a list of UpdateStatus resources\n\nCompatibility level 4: No compatibility is provided, the API can change at any point for any reason. These capabilities should not be used by applications needing long term support.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/config/v1alpha1.UpdateStatus"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"metadata", "items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.UpdateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateStatusSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateStatusSpec is empty for now, can possibly hold configuration for Update Status Controller in the future",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_openshift_api_config_v1alpha1_UpdateStatusStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "UpdateStatusStatus is the API about in-progress updates, kept populated by Update Status Controller by aggregating and summarizing UpdateInformers",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"controlPlane": {
+						SchemaProps: spec.SchemaProps{
+							Description: "ControlPlaneUpdateStatus contains a summary and insights related to the control plane update",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/config/v1alpha1.ControlPlaneUpdateStatus"),
+						},
+					},
+					"workerPools": {
+						SchemaProps: spec.SchemaProps{
+							Description: "WorkerPoolsUpdateStatus contains summaries and insights related to the worker pools update",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/config/v1alpha1.PoolUpdateStatus"),
+									},
+								},
+							},
+						},
+					},
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type": "map",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "Conditions provide details about Update Status Controller operational matters",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"controlPlane", "workerPools"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/config/v1alpha1.ControlPlaneUpdateStatus", "github.com/openshift/api/config/v1alpha1.PoolUpdateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition"},
 	}
 }
 

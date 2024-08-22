@@ -1,0 +1,1697 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    api-approved.openshift.io: TODO
+    api.openshift.io/merged-by-featuregates: "true"
+    include.release.openshift.io/ibm-cloud-managed: "true"
+    include.release.openshift.io/self-managed-high-availability: "true"
+    release.openshift.io/feature-set: CustomNoUpgrade
+  name: updatestatuses.config.openshift.io
+spec:
+  group: config.openshift.io
+  names:
+    kind: UpdateStatus
+    listKind: UpdateStatusList
+    plural: updatestatuses
+    singular: updatestatus
+  scope: Cluster
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: "UpdateStatus is the API about in-progress updates, kept populated
+          by Update Status Controller by aggregating and summarizing UpdateInformers
+          \n Compatibility level 4: No compatibility is provided, the API can change
+          at any point for any reason. These capabilities should not be used by applications
+          needing long term support."
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: UpdateStatusSpec is empty for now, can possibly hold configuration
+              for Update Status Controller in the future
+            type: object
+          status:
+            description: UpdateStatusStatus is the API about in-progress updates,
+              kept populated by Update Status Controller by aggregating and summarizing
+              UpdateInformers
+            properties:
+              conditions:
+                description: Conditions provide details about Update Status Controller
+                  operational matters
+                items:
+                  description: "Condition contains details for one aspect of the current
+                    state of this API Resource. --- This struct is intended for direct
+                    use as an array at the field path .status.conditions.  For example,
+                    \n type FooStatus struct{ // Represents the observations of a
+                    foo's current state. // Known .status.conditions.type are: \"Available\",
+                    \"Progressing\", and \"Degraded\" // +patchMergeKey=type // +patchStrategy=merge
+                    // +listType=map // +listMapKey=type Conditions []metav1.Condition
+                    `json:\"conditions,omitempty\" patchStrategy:\"merge\" patchMergeKey:\"type\"
+                    protobuf:\"bytes,1,rep,name=conditions\"` \n // other fields }"
+                  properties:
+                    lastTransitionTime:
+                      description: lastTransitionTime is the last time the condition
+                        transitioned from one status to another. This should be when
+                        the underlying condition changed.  If that is not known, then
+                        using the time when the API field changed is acceptable.
+                      format: date-time
+                      type: string
+                    message:
+                      description: message is a human readable message indicating
+                        details about the transition. This may be an empty string.
+                      maxLength: 32768
+                      type: string
+                    observedGeneration:
+                      description: observedGeneration represents the .metadata.generation
+                        that the condition was set based upon. For instance, if .metadata.generation
+                        is currently 12, but the .status.conditions[x].observedGeneration
+                        is 9, the condition is out of date with respect to the current
+                        state of the instance.
+                      format: int64
+                      minimum: 0
+                      type: integer
+                    reason:
+                      description: reason contains a programmatic identifier indicating
+                        the reason for the condition's last transition. Producers
+                        of specific condition types may define expected values and
+                        meanings for this field, and whether the values are considered
+                        a guaranteed API. The value should be a CamelCase string.
+                        This field may not be empty.
+                      maxLength: 1024
+                      minLength: 1
+                      pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                      type: string
+                    status:
+                      description: status of the condition, one of True, False, Unknown.
+                      enum:
+                      - "True"
+                      - "False"
+                      - Unknown
+                      type: string
+                    type:
+                      description: type of condition in CamelCase or in foo.example.com/CamelCase.
+                        --- Many .condition.type values are consistent across resources
+                        like Available, but because arbitrary conditions can be useful
+                        (see .node.status.conditions), the ability to deconflict is
+                        important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                      maxLength: 316
+                      pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              controlPlane:
+                description: ControlPlaneUpdateStatus contains a summary and insights
+                  related to the control plane update
+                properties:
+                  conditions:
+                    description: Conditions provides details about the control plane
+                      update
+                    items:
+                      description: "Condition contains details for one aspect of the
+                        current state of this API Resource. --- This struct is intended
+                        for direct use as an array at the field path .status.conditions.
+                        \ For example, \n type FooStatus struct{ // Represents the
+                        observations of a foo's current state. // Known .status.conditions.type
+                        are: \"Available\", \"Progressing\", and \"Degraded\" // +patchMergeKey=type
+                        // +patchStrategy=merge // +listType=map // +listMapKey=type
+                        Conditions []metav1.Condition `json:\"conditions,omitempty\"
+                        patchStrategy:\"merge\" patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`
+                        \n // other fields }"
+                      properties:
+                        lastTransitionTime:
+                          description: lastTransitionTime is the last time the condition
+                            transitioned from one status to another. This should be
+                            when the underlying condition changed.  If that is not
+                            known, then using the time when the API field changed
+                            is acceptable.
+                          format: date-time
+                          type: string
+                        message:
+                          description: message is a human readable message indicating
+                            details about the transition. This may be an empty string.
+                          maxLength: 32768
+                          type: string
+                        observedGeneration:
+                          description: observedGeneration represents the .metadata.generation
+                            that the condition was set based upon. For instance, if
+                            .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration
+                            is 9, the condition is out of date with respect to the
+                            current state of the instance.
+                          format: int64
+                          minimum: 0
+                          type: integer
+                        reason:
+                          description: reason contains a programmatic identifier indicating
+                            the reason for the condition's last transition. Producers
+                            of specific condition types may define expected values
+                            and meanings for this field, and whether the values are
+                            considered a guaranteed API. The value should be a CamelCase
+                            string. This field may not be empty.
+                          maxLength: 1024
+                          minLength: 1
+                          pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                          type: string
+                        status:
+                          description: status of the condition, one of True, False,
+                            Unknown.
+                          enum:
+                          - "True"
+                          - "False"
+                          - Unknown
+                          type: string
+                        type:
+                          description: type of condition in CamelCase or in foo.example.com/CamelCase.
+                            --- Many .condition.type values are consistent across
+                            resources like Available, but because arbitrary conditions
+                            can be useful (see .node.status.conditions), the ability
+                            to deconflict is important. The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                          maxLength: 316
+                          pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                          type: string
+                      required:
+                      - lastTransitionTime
+                      - message
+                      - reason
+                      - status
+                      - type
+                      type: object
+                    type: array
+                    x-kubernetes-list-map-keys:
+                    - type
+                    x-kubernetes-list-type: map
+                  informers:
+                    description: Informers is a list of insight producers, each carries
+                      a list of insights
+                    items:
+                      description: UpdateInformer is an insight producer identified
+                        by a name, carrying a list of insights it produced
+                      properties:
+                        insights:
+                          description: Insights is a list of insights produced by
+                            this producer
+                          items:
+                            properties:
+                              acquisitionTime:
+                                description: AcquiredAt is the time when the data
+                                  was acquired by the producer
+                                format: date-time
+                                type: string
+                              co:
+                                description: ClusterOperatorStatusInsight is a status
+                                  insight about the state of a control plane cluster
+                                  operator update represented by a ClusterOperator
+                                  resource
+                                properties:
+                                  conditions:
+                                    description: Conditions provide details about
+                                      the operator
+                                    items:
+                                      description: "Condition contains details for
+                                        one aspect of the current state of this API
+                                        Resource. --- This struct is intended for
+                                        direct use as an array at the field path .status.conditions.
+                                        \ For example, \n type FooStatus struct{ //
+                                        Represents the observations of a foo's current
+                                        state. // Known .status.conditions.type are:
+                                        \"Available\", \"Progressing\", and \"Degraded\"
+                                        // +patchMergeKey=type // +patchStrategy=merge
+                                        // +listType=map // +listMapKey=type Conditions
+                                        []metav1.Condition `json:\"conditions,omitempty\"
+                                        patchStrategy:\"merge\" patchMergeKey:\"type\"
+                                        protobuf:\"bytes,1,rep,name=conditions\"`
+                                        \n // other fields }"
+                                      properties:
+                                        lastTransitionTime:
+                                          description: lastTransitionTime is the last
+                                            time the condition transitioned from one
+                                            status to another. This should be when
+                                            the underlying condition changed.  If
+                                            that is not known, then using the time
+                                            when the API field changed is acceptable.
+                                          format: date-time
+                                          type: string
+                                        message:
+                                          description: message is a human readable
+                                            message indicating details about the transition.
+                                            This may be an empty string.
+                                          maxLength: 32768
+                                          type: string
+                                        observedGeneration:
+                                          description: observedGeneration represents
+                                            the .metadata.generation that the condition
+                                            was set based upon. For instance, if .metadata.generation
+                                            is currently 12, but the .status.conditions[x].observedGeneration
+                                            is 9, the condition is out of date with
+                                            respect to the current state of the instance.
+                                          format: int64
+                                          minimum: 0
+                                          type: integer
+                                        reason:
+                                          description: reason contains a programmatic
+                                            identifier indicating the reason for the
+                                            condition's last transition. Producers
+                                            of specific condition types may define
+                                            expected values and meanings for this
+                                            field, and whether the values are considered
+                                            a guaranteed API. The value should be
+                                            a CamelCase string. This field may not
+                                            be empty.
+                                          maxLength: 1024
+                                          minLength: 1
+                                          pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                          type: string
+                                        status:
+                                          description: status of the condition, one
+                                            of True, False, Unknown.
+                                          enum:
+                                          - "True"
+                                          - "False"
+                                          - Unknown
+                                          type: string
+                                        type:
+                                          description: type of condition in CamelCase
+                                            or in foo.example.com/CamelCase. --- Many
+                                            .condition.type values are consistent
+                                            across resources like Available, but because
+                                            arbitrary conditions can be useful (see
+                                            .node.status.conditions), the ability
+                                            to deconflict is important. The regex
+                                            it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                          maxLength: 316
+                                          pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                          type: string
+                                      required:
+                                      - lastTransitionTime
+                                      - message
+                                      - reason
+                                      - status
+                                      - type
+                                      type: object
+                                    type: array
+                                    x-kubernetes-list-map-keys:
+                                    - type
+                                    x-kubernetes-list-type: map
+                                  name:
+                                    description: Name is the name of the operator
+                                    type: string
+                                  resource:
+                                    description: Resource is the ClusterOperator resource
+                                      that represents the operator
+                                    properties:
+                                      apiGroup:
+                                        description: APIGroup of the object being
+                                          referenced
+                                        type: string
+                                      kind:
+                                        description: Kind of object being referenced
+                                        type: string
+                                      name:
+                                        description: Name of the object being referenced
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the object being
+                                          referenced, if any
+                                        type: string
+                                    type: object
+                                type: object
+                              cv:
+                                description: ClusterVersionStatusInsight is a status
+                                  insight about the state of a control plane update,
+                                  where the control plane is represented by a ClusterVersion
+                                  resource usually managed by CVO
+                                properties:
+                                  assessment:
+                                    description: Assessment is the assessment of the
+                                      control plane update process
+                                    type: string
+                                  completedAt:
+                                    description: CompletedAt is the time when the
+                                      update completed
+                                    format: date-time
+                                    type: string
+                                  completion:
+                                    description: Completion is a percentage of the
+                                      update completion (0-100)
+                                    format: int32
+                                    type: integer
+                                  conditions:
+                                    description: Conditions provides details about
+                                      the control plane update
+                                    items:
+                                      description: "Condition contains details for
+                                        one aspect of the current state of this API
+                                        Resource. --- This struct is intended for
+                                        direct use as an array at the field path .status.conditions.
+                                        \ For example, \n type FooStatus struct{ //
+                                        Represents the observations of a foo's current
+                                        state. // Known .status.conditions.type are:
+                                        \"Available\", \"Progressing\", and \"Degraded\"
+                                        // +patchMergeKey=type // +patchStrategy=merge
+                                        // +listType=map // +listMapKey=type Conditions
+                                        []metav1.Condition `json:\"conditions,omitempty\"
+                                        patchStrategy:\"merge\" patchMergeKey:\"type\"
+                                        protobuf:\"bytes,1,rep,name=conditions\"`
+                                        \n // other fields }"
+                                      properties:
+                                        lastTransitionTime:
+                                          description: lastTransitionTime is the last
+                                            time the condition transitioned from one
+                                            status to another. This should be when
+                                            the underlying condition changed.  If
+                                            that is not known, then using the time
+                                            when the API field changed is acceptable.
+                                          format: date-time
+                                          type: string
+                                        message:
+                                          description: message is a human readable
+                                            message indicating details about the transition.
+                                            This may be an empty string.
+                                          maxLength: 32768
+                                          type: string
+                                        observedGeneration:
+                                          description: observedGeneration represents
+                                            the .metadata.generation that the condition
+                                            was set based upon. For instance, if .metadata.generation
+                                            is currently 12, but the .status.conditions[x].observedGeneration
+                                            is 9, the condition is out of date with
+                                            respect to the current state of the instance.
+                                          format: int64
+                                          minimum: 0
+                                          type: integer
+                                        reason:
+                                          description: reason contains a programmatic
+                                            identifier indicating the reason for the
+                                            condition's last transition. Producers
+                                            of specific condition types may define
+                                            expected values and meanings for this
+                                            field, and whether the values are considered
+                                            a guaranteed API. The value should be
+                                            a CamelCase string. This field may not
+                                            be empty.
+                                          maxLength: 1024
+                                          minLength: 1
+                                          pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                          type: string
+                                        status:
+                                          description: status of the condition, one
+                                            of True, False, Unknown.
+                                          enum:
+                                          - "True"
+                                          - "False"
+                                          - Unknown
+                                          type: string
+                                        type:
+                                          description: type of condition in CamelCase
+                                            or in foo.example.com/CamelCase. --- Many
+                                            .condition.type values are consistent
+                                            across resources like Available, but because
+                                            arbitrary conditions can be useful (see
+                                            .node.status.conditions), the ability
+                                            to deconflict is important. The regex
+                                            it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                          maxLength: 316
+                                          pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                          type: string
+                                      required:
+                                      - lastTransitionTime
+                                      - message
+                                      - reason
+                                      - status
+                                      - type
+                                      type: object
+                                    type: array
+                                    x-kubernetes-list-map-keys:
+                                    - type
+                                    x-kubernetes-list-type: map
+                                  estimatedCompletedAt:
+                                    description: EstimatedCompletedAt is the estimated
+                                      time when the update will complete
+                                    format: date-time
+                                    type: string
+                                  resource:
+                                    description: Resource is the ClusterVersion resource
+                                      that represents the control plane
+                                    properties:
+                                      apiGroup:
+                                        description: APIGroup of the object being
+                                          referenced
+                                        type: string
+                                      kind:
+                                        description: Kind of object being referenced
+                                        type: string
+                                      name:
+                                        description: Name of the object being referenced
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the object being
+                                          referenced, if any
+                                        type: string
+                                    type: object
+                                  startedAt:
+                                    description: StartedAt is the time when the update
+                                      started
+                                    format: date-time
+                                    type: string
+                                  versions:
+                                    description: Versions contains the original and
+                                      target versions of the upgrade
+                                    properties:
+                                      previous:
+                                        description: Previous is the version of the
+                                          control plane before the update
+                                        type: string
+                                      previousPartial:
+                                        description: IsPreviousPartial is true if
+                                          the update was initiated in a state where
+                                          the previous upgrade (to the original version)
+                                          was not fully completed
+                                        type: boolean
+                                      target:
+                                        description: Target is the version of the
+                                          control plane after the update
+                                        type: string
+                                      targetInstall:
+                                        description: IsTargetInstall is true if the
+                                          current (or last completed) work is an installation,
+                                          not an upgrade
+                                        type: boolean
+                                    type: object
+                                type: object
+                              health:
+                                description: UpdateHealthInsight is a generic health
+                                  insight about the update. It does not represent
+                                  a status of any specific resource but surfaces actionable
+                                  information about the health of the cluster or an
+                                  update
+                                properties:
+                                  impact:
+                                    description: Impact describes the impact the reported
+                                      condition has on the cluster or update
+                                    properties:
+                                      description:
+                                        description: Description is a human-oriented
+                                          description of the condition reported by
+                                          the insight
+                                        type: string
+                                      level:
+                                        description: Level is the severity of the
+                                          impact
+                                        enum:
+                                        - info
+                                        - warning
+                                        - error
+                                        - critical
+                                        type: string
+                                      summary:
+                                        description: Summary is a short summary of
+                                          the impact
+                                        type: string
+                                      type:
+                                        description: Type is the type of the impact
+                                        enum:
+                                        - None
+                                        - Unknown
+                                        - API Availability
+                                        - Cluster Capacity
+                                        - Application Availability
+                                        - Application Outage
+                                        - Data Loss
+                                        - Update Speed
+                                        - Update Stalled
+                                        type: string
+                                    type: object
+                                  remediation:
+                                    description: Remediation contains ... TODO
+                                    properties:
+                                      estimatedFinish:
+                                        description: EstimatedFinish is the estimated
+                                          time when the informer expects the condition
+                                          to be resolved, if applicable. This should
+                                          normally only be provided by system level
+                                          insights (impact level=status)
+                                        format: date-time
+                                        type: string
+                                      reference:
+                                        description: Reference is a URL where administrators
+                                          can find information to resolve or prevent
+                                          the reported condition
+                                        type: string
+                                    type: object
+                                  scope:
+                                    description: Scope is list of objects involved
+                                      in the insight
+                                    properties:
+                                      resources:
+                                        description: Resources is a list of resources
+                                          involved in the insight
+                                        items:
+                                          description: ResourceRef is a reference
+                                            to a kubernetes resource, typically involved
+                                            in an insight
+                                          properties:
+                                            apiGroup:
+                                              description: APIGroup of the object
+                                                being referenced
+                                              type: string
+                                            kind:
+                                              description: Kind of object being referenced
+                                              type: string
+                                            name:
+                                              description: Name of the object being
+                                                referenced
+                                              type: string
+                                            namespace:
+                                              description: Namespace of the object
+                                                being referenced, if any
+                                              type: string
+                                          type: object
+                                        type: array
+                                      type:
+                                        description: Type is either ControlPlane or
+                                          WorkerPool
+                                        enum:
+                                        - ControlPlane
+                                        - WorkerPool
+                                        type: string
+                                    required:
+                                    - type
+                                    type: object
+                                  startedAt:
+                                    description: StartedAt is the time when the condition
+                                      reported by the insight started
+                                    format: date-time
+                                    type: string
+                                type: object
+                              mcp:
+                                description: MachineConfigPoolStatusInsight is a status
+                                  insight about the state of a worker pool update,
+                                  where the worker pool is represented by a MachineConfigPool
+                                  resource
+                                properties:
+                                  assessment:
+                                    description: Assessment is the assessment of the
+                                      machine config pool update process
+                                    type: string
+                                  completion:
+                                    description: Completion is a percentage of the
+                                      update completion (0-100)
+                                    format: int32
+                                    type: integer
+                                  conditions:
+                                    description: Conditions provide details about
+                                      the machine config pool
+                                    items:
+                                      description: "Condition contains details for
+                                        one aspect of the current state of this API
+                                        Resource. --- This struct is intended for
+                                        direct use as an array at the field path .status.conditions.
+                                        \ For example, \n type FooStatus struct{ //
+                                        Represents the observations of a foo's current
+                                        state. // Known .status.conditions.type are:
+                                        \"Available\", \"Progressing\", and \"Degraded\"
+                                        // +patchMergeKey=type // +patchStrategy=merge
+                                        // +listType=map // +listMapKey=type Conditions
+                                        []metav1.Condition `json:\"conditions,omitempty\"
+                                        patchStrategy:\"merge\" patchMergeKey:\"type\"
+                                        protobuf:\"bytes,1,rep,name=conditions\"`
+                                        \n // other fields }"
+                                      properties:
+                                        lastTransitionTime:
+                                          description: lastTransitionTime is the last
+                                            time the condition transitioned from one
+                                            status to another. This should be when
+                                            the underlying condition changed.  If
+                                            that is not known, then using the time
+                                            when the API field changed is acceptable.
+                                          format: date-time
+                                          type: string
+                                        message:
+                                          description: message is a human readable
+                                            message indicating details about the transition.
+                                            This may be an empty string.
+                                          maxLength: 32768
+                                          type: string
+                                        observedGeneration:
+                                          description: observedGeneration represents
+                                            the .metadata.generation that the condition
+                                            was set based upon. For instance, if .metadata.generation
+                                            is currently 12, but the .status.conditions[x].observedGeneration
+                                            is 9, the condition is out of date with
+                                            respect to the current state of the instance.
+                                          format: int64
+                                          minimum: 0
+                                          type: integer
+                                        reason:
+                                          description: reason contains a programmatic
+                                            identifier indicating the reason for the
+                                            condition's last transition. Producers
+                                            of specific condition types may define
+                                            expected values and meanings for this
+                                            field, and whether the values are considered
+                                            a guaranteed API. The value should be
+                                            a CamelCase string. This field may not
+                                            be empty.
+                                          maxLength: 1024
+                                          minLength: 1
+                                          pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                          type: string
+                                        status:
+                                          description: status of the condition, one
+                                            of True, False, Unknown.
+                                          enum:
+                                          - "True"
+                                          - "False"
+                                          - Unknown
+                                          type: string
+                                        type:
+                                          description: type of condition in CamelCase
+                                            or in foo.example.com/CamelCase. --- Many
+                                            .condition.type values are consistent
+                                            across resources like Available, but because
+                                            arbitrary conditions can be useful (see
+                                            .node.status.conditions), the ability
+                                            to deconflict is important. The regex
+                                            it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                          maxLength: 316
+                                          pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                          type: string
+                                      required:
+                                      - lastTransitionTime
+                                      - message
+                                      - reason
+                                      - status
+                                      - type
+                                      type: object
+                                    type: array
+                                    x-kubernetes-list-map-keys:
+                                    - type
+                                    x-kubernetes-list-type: map
+                                  name:
+                                    description: Name is the name of the machine config
+                                      pool
+                                    type: string
+                                  resource:
+                                    description: Resource is the MachineConfigPool
+                                      resource that represents the pool
+                                    properties:
+                                      apiGroup:
+                                        description: APIGroup of the object being
+                                          referenced
+                                        type: string
+                                      kind:
+                                        description: Kind of object being referenced
+                                        type: string
+                                      name:
+                                        description: Name of the object being referenced
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the object being
+                                          referenced, if any
+                                        type: string
+                                    type: object
+                                  scopeType:
+                                    description: Scope describes whether the pool
+                                      is a control plane or a worker pool
+                                    enum:
+                                    - ControlPlane
+                                    - WorkerPool
+                                    type: string
+                                  summaries:
+                                    description: Summaries is a list of counts of
+                                      nodes matching certain criteria (e.g. updated,
+                                      degraded, etc.)
+                                    items:
+                                      properties:
+                                        count:
+                                          description: Count is the number of nodes
+                                            matching the criteria
+                                          format: int32
+                                          type: integer
+                                        type:
+                                          description: Type is the type of the summary
+                                          type: string
+                                      required:
+                                      - type
+                                      type: object
+                                    type: array
+                                    x-kubernetes-list-map-keys:
+                                    - type
+                                    x-kubernetes-list-type: map
+                                type: object
+                              node:
+                                description: NodeStatusInsight is a status insight
+                                  about the state of a worker node update, where the
+                                  worker node is represented by a Node resource
+                                properties:
+                                  conditions:
+                                    description: Conditions provides details about
+                                      the control plane update
+                                    items:
+                                      description: "Condition contains details for
+                                        one aspect of the current state of this API
+                                        Resource. --- This struct is intended for
+                                        direct use as an array at the field path .status.conditions.
+                                        \ For example, \n type FooStatus struct{ //
+                                        Represents the observations of a foo's current
+                                        state. // Known .status.conditions.type are:
+                                        \"Available\", \"Progressing\", and \"Degraded\"
+                                        // +patchMergeKey=type // +patchStrategy=merge
+                                        // +listType=map // +listMapKey=type Conditions
+                                        []metav1.Condition `json:\"conditions,omitempty\"
+                                        patchStrategy:\"merge\" patchMergeKey:\"type\"
+                                        protobuf:\"bytes,1,rep,name=conditions\"`
+                                        \n // other fields }"
+                                      properties:
+                                        lastTransitionTime:
+                                          description: lastTransitionTime is the last
+                                            time the condition transitioned from one
+                                            status to another. This should be when
+                                            the underlying condition changed.  If
+                                            that is not known, then using the time
+                                            when the API field changed is acceptable.
+                                          format: date-time
+                                          type: string
+                                        message:
+                                          description: message is a human readable
+                                            message indicating details about the transition.
+                                            This may be an empty string.
+                                          maxLength: 32768
+                                          type: string
+                                        observedGeneration:
+                                          description: observedGeneration represents
+                                            the .metadata.generation that the condition
+                                            was set based upon. For instance, if .metadata.generation
+                                            is currently 12, but the .status.conditions[x].observedGeneration
+                                            is 9, the condition is out of date with
+                                            respect to the current state of the instance.
+                                          format: int64
+                                          minimum: 0
+                                          type: integer
+                                        reason:
+                                          description: reason contains a programmatic
+                                            identifier indicating the reason for the
+                                            condition's last transition. Producers
+                                            of specific condition types may define
+                                            expected values and meanings for this
+                                            field, and whether the values are considered
+                                            a guaranteed API. The value should be
+                                            a CamelCase string. This field may not
+                                            be empty.
+                                          maxLength: 1024
+                                          minLength: 1
+                                          pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                          type: string
+                                        status:
+                                          description: status of the condition, one
+                                            of True, False, Unknown.
+                                          enum:
+                                          - "True"
+                                          - "False"
+                                          - Unknown
+                                          type: string
+                                        type:
+                                          description: type of condition in CamelCase
+                                            or in foo.example.com/CamelCase. --- Many
+                                            .condition.type values are consistent
+                                            across resources like Available, but because
+                                            arbitrary conditions can be useful (see
+                                            .node.status.conditions), the ability
+                                            to deconflict is important. The regex
+                                            it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                          maxLength: 316
+                                          pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                          type: string
+                                      required:
+                                      - lastTransitionTime
+                                      - message
+                                      - reason
+                                      - status
+                                      - type
+                                      type: object
+                                    type: array
+                                    x-kubernetes-list-map-keys:
+                                    - type
+                                    x-kubernetes-list-type: map
+                                  estToComplete:
+                                    description: EstToComplete is the estimated time
+                                      to complete the update, when known
+                                    type: string
+                                  message:
+                                    description: Message is a human-readable message
+                                      about the node update status
+                                    type: string
+                                  name:
+                                    description: Name is the name of the node
+                                    type: string
+                                  poolResource:
+                                    description: PoolResource is the resource that
+                                      represents the pool the node is a member of
+                                    properties:
+                                      apiGroup:
+                                        description: APIGroup of the object being
+                                          referenced
+                                        type: string
+                                      kind:
+                                        description: Kind of object being referenced
+                                        type: string
+                                      name:
+                                        description: Name of the object being referenced
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the object being
+                                          referenced, if any
+                                        type: string
+                                    type: object
+                                  resource:
+                                    description: Resource is the Node resource that
+                                      represents the node
+                                    properties:
+                                      apiGroup:
+                                        description: APIGroup of the object being
+                                          referenced
+                                        type: string
+                                      kind:
+                                        description: Kind of object being referenced
+                                        type: string
+                                      name:
+                                        description: Name of the object being referenced
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the object being
+                                          referenced, if any
+                                        type: string
+                                    type: object
+                                  version:
+                                    description: Version is the version of the node,
+                                      when known
+                                    type: string
+                                type: object
+                              type:
+                                type: string
+                              uid:
+                                description: UID identifies an insight over time
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: Name is the name of the insight producer
+                          type: string
+                      required:
+                      - name
+                      type: object
+                    type: array
+                    x-kubernetes-list-map-keys:
+                    - name
+                    x-kubernetes-list-type: map
+                type: object
+              workerPools:
+                description: WorkerPoolsUpdateStatus contains summaries and insights
+                  related to the worker pools update
+                items:
+                  description: PoolUpdateStatus contains a summary and insights related
+                    to a node pool update
+                  properties:
+                    informers:
+                      description: Informers is a list of insight producers, each
+                        carries a list of insights
+                      items:
+                        description: UpdateInformer is an insight producer identified
+                          by a name, carrying a list of insights it produced
+                        properties:
+                          insights:
+                            description: Insights is a list of insights produced by
+                              this producer
+                            items:
+                              properties:
+                                acquisitionTime:
+                                  description: AcquiredAt is the time when the data
+                                    was acquired by the producer
+                                  format: date-time
+                                  type: string
+                                co:
+                                  description: ClusterOperatorStatusInsight is a status
+                                    insight about the state of a control plane cluster
+                                    operator update represented by a ClusterOperator
+                                    resource
+                                  properties:
+                                    conditions:
+                                      description: Conditions provide details about
+                                        the operator
+                                      items:
+                                        description: "Condition contains details for
+                                          one aspect of the current state of this
+                                          API Resource. --- This struct is intended
+                                          for direct use as an array at the field
+                                          path .status.conditions.  For example, \n
+                                          type FooStatus struct{ // Represents the
+                                          observations of a foo's current state. //
+                                          Known .status.conditions.type are: \"Available\",
+                                          \"Progressing\", and \"Degraded\" // +patchMergeKey=type
+                                          // +patchStrategy=merge // +listType=map
+                                          // +listMapKey=type Conditions []metav1.Condition
+                                          `json:\"conditions,omitempty\" patchStrategy:\"merge\"
+                                          patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`
+                                          \n // other fields }"
+                                        properties:
+                                          lastTransitionTime:
+                                            description: lastTransitionTime is the
+                                              last time the condition transitioned
+                                              from one status to another. This should
+                                              be when the underlying condition changed.  If
+                                              that is not known, then using the time
+                                              when the API field changed is acceptable.
+                                            format: date-time
+                                            type: string
+                                          message:
+                                            description: message is a human readable
+                                              message indicating details about the
+                                              transition. This may be an empty string.
+                                            maxLength: 32768
+                                            type: string
+                                          observedGeneration:
+                                            description: observedGeneration represents
+                                              the .metadata.generation that the condition
+                                              was set based upon. For instance, if
+                                              .metadata.generation is currently 12,
+                                              but the .status.conditions[x].observedGeneration
+                                              is 9, the condition is out of date with
+                                              respect to the current state of the
+                                              instance.
+                                            format: int64
+                                            minimum: 0
+                                            type: integer
+                                          reason:
+                                            description: reason contains a programmatic
+                                              identifier indicating the reason for
+                                              the condition's last transition. Producers
+                                              of specific condition types may define
+                                              expected values and meanings for this
+                                              field, and whether the values are considered
+                                              a guaranteed API. The value should be
+                                              a CamelCase string. This field may not
+                                              be empty.
+                                            maxLength: 1024
+                                            minLength: 1
+                                            pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                            type: string
+                                          status:
+                                            description: status of the condition,
+                                              one of True, False, Unknown.
+                                            enum:
+                                            - "True"
+                                            - "False"
+                                            - Unknown
+                                            type: string
+                                          type:
+                                            description: type of condition in CamelCase
+                                              or in foo.example.com/CamelCase. ---
+                                              Many .condition.type values are consistent
+                                              across resources like Available, but
+                                              because arbitrary conditions can be
+                                              useful (see .node.status.conditions),
+                                              the ability to deconflict is important.
+                                              The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                            maxLength: 316
+                                            pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                            type: string
+                                        required:
+                                        - lastTransitionTime
+                                        - message
+                                        - reason
+                                        - status
+                                        - type
+                                        type: object
+                                      type: array
+                                      x-kubernetes-list-map-keys:
+                                      - type
+                                      x-kubernetes-list-type: map
+                                    name:
+                                      description: Name is the name of the operator
+                                      type: string
+                                    resource:
+                                      description: Resource is the ClusterOperator
+                                        resource that represents the operator
+                                      properties:
+                                        apiGroup:
+                                          description: APIGroup of the object being
+                                            referenced
+                                          type: string
+                                        kind:
+                                          description: Kind of object being referenced
+                                          type: string
+                                        name:
+                                          description: Name of the object being referenced
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the object being
+                                            referenced, if any
+                                          type: string
+                                      type: object
+                                  type: object
+                                cv:
+                                  description: ClusterVersionStatusInsight is a status
+                                    insight about the state of a control plane update,
+                                    where the control plane is represented by a ClusterVersion
+                                    resource usually managed by CVO
+                                  properties:
+                                    assessment:
+                                      description: Assessment is the assessment of
+                                        the control plane update process
+                                      type: string
+                                    completedAt:
+                                      description: CompletedAt is the time when the
+                                        update completed
+                                      format: date-time
+                                      type: string
+                                    completion:
+                                      description: Completion is a percentage of the
+                                        update completion (0-100)
+                                      format: int32
+                                      type: integer
+                                    conditions:
+                                      description: Conditions provides details about
+                                        the control plane update
+                                      items:
+                                        description: "Condition contains details for
+                                          one aspect of the current state of this
+                                          API Resource. --- This struct is intended
+                                          for direct use as an array at the field
+                                          path .status.conditions.  For example, \n
+                                          type FooStatus struct{ // Represents the
+                                          observations of a foo's current state. //
+                                          Known .status.conditions.type are: \"Available\",
+                                          \"Progressing\", and \"Degraded\" // +patchMergeKey=type
+                                          // +patchStrategy=merge // +listType=map
+                                          // +listMapKey=type Conditions []metav1.Condition
+                                          `json:\"conditions,omitempty\" patchStrategy:\"merge\"
+                                          patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`
+                                          \n // other fields }"
+                                        properties:
+                                          lastTransitionTime:
+                                            description: lastTransitionTime is the
+                                              last time the condition transitioned
+                                              from one status to another. This should
+                                              be when the underlying condition changed.  If
+                                              that is not known, then using the time
+                                              when the API field changed is acceptable.
+                                            format: date-time
+                                            type: string
+                                          message:
+                                            description: message is a human readable
+                                              message indicating details about the
+                                              transition. This may be an empty string.
+                                            maxLength: 32768
+                                            type: string
+                                          observedGeneration:
+                                            description: observedGeneration represents
+                                              the .metadata.generation that the condition
+                                              was set based upon. For instance, if
+                                              .metadata.generation is currently 12,
+                                              but the .status.conditions[x].observedGeneration
+                                              is 9, the condition is out of date with
+                                              respect to the current state of the
+                                              instance.
+                                            format: int64
+                                            minimum: 0
+                                            type: integer
+                                          reason:
+                                            description: reason contains a programmatic
+                                              identifier indicating the reason for
+                                              the condition's last transition. Producers
+                                              of specific condition types may define
+                                              expected values and meanings for this
+                                              field, and whether the values are considered
+                                              a guaranteed API. The value should be
+                                              a CamelCase string. This field may not
+                                              be empty.
+                                            maxLength: 1024
+                                            minLength: 1
+                                            pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                            type: string
+                                          status:
+                                            description: status of the condition,
+                                              one of True, False, Unknown.
+                                            enum:
+                                            - "True"
+                                            - "False"
+                                            - Unknown
+                                            type: string
+                                          type:
+                                            description: type of condition in CamelCase
+                                              or in foo.example.com/CamelCase. ---
+                                              Many .condition.type values are consistent
+                                              across resources like Available, but
+                                              because arbitrary conditions can be
+                                              useful (see .node.status.conditions),
+                                              the ability to deconflict is important.
+                                              The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                            maxLength: 316
+                                            pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                            type: string
+                                        required:
+                                        - lastTransitionTime
+                                        - message
+                                        - reason
+                                        - status
+                                        - type
+                                        type: object
+                                      type: array
+                                      x-kubernetes-list-map-keys:
+                                      - type
+                                      x-kubernetes-list-type: map
+                                    estimatedCompletedAt:
+                                      description: EstimatedCompletedAt is the estimated
+                                        time when the update will complete
+                                      format: date-time
+                                      type: string
+                                    resource:
+                                      description: Resource is the ClusterVersion
+                                        resource that represents the control plane
+                                      properties:
+                                        apiGroup:
+                                          description: APIGroup of the object being
+                                            referenced
+                                          type: string
+                                        kind:
+                                          description: Kind of object being referenced
+                                          type: string
+                                        name:
+                                          description: Name of the object being referenced
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the object being
+                                            referenced, if any
+                                          type: string
+                                      type: object
+                                    startedAt:
+                                      description: StartedAt is the time when the
+                                        update started
+                                      format: date-time
+                                      type: string
+                                    versions:
+                                      description: Versions contains the original
+                                        and target versions of the upgrade
+                                      properties:
+                                        previous:
+                                          description: Previous is the version of
+                                            the control plane before the update
+                                          type: string
+                                        previousPartial:
+                                          description: IsPreviousPartial is true if
+                                            the update was initiated in a state where
+                                            the previous upgrade (to the original
+                                            version) was not fully completed
+                                          type: boolean
+                                        target:
+                                          description: Target is the version of the
+                                            control plane after the update
+                                          type: string
+                                        targetInstall:
+                                          description: IsTargetInstall is true if
+                                            the current (or last completed) work is
+                                            an installation, not an upgrade
+                                          type: boolean
+                                      type: object
+                                  type: object
+                                health:
+                                  description: UpdateHealthInsight is a generic health
+                                    insight about the update. It does not represent
+                                    a status of any specific resource but surfaces
+                                    actionable information about the health of the
+                                    cluster or an update
+                                  properties:
+                                    impact:
+                                      description: Impact describes the impact the
+                                        reported condition has on the cluster or update
+                                      properties:
+                                        description:
+                                          description: Description is a human-oriented
+                                            description of the condition reported
+                                            by the insight
+                                          type: string
+                                        level:
+                                          description: Level is the severity of the
+                                            impact
+                                          enum:
+                                          - info
+                                          - warning
+                                          - error
+                                          - critical
+                                          type: string
+                                        summary:
+                                          description: Summary is a short summary
+                                            of the impact
+                                          type: string
+                                        type:
+                                          description: Type is the type of the impact
+                                          enum:
+                                          - None
+                                          - Unknown
+                                          - API Availability
+                                          - Cluster Capacity
+                                          - Application Availability
+                                          - Application Outage
+                                          - Data Loss
+                                          - Update Speed
+                                          - Update Stalled
+                                          type: string
+                                      type: object
+                                    remediation:
+                                      description: Remediation contains ... TODO
+                                      properties:
+                                        estimatedFinish:
+                                          description: EstimatedFinish is the estimated
+                                            time when the informer expects the condition
+                                            to be resolved, if applicable. This should
+                                            normally only be provided by system level
+                                            insights (impact level=status)
+                                          format: date-time
+                                          type: string
+                                        reference:
+                                          description: Reference is a URL where administrators
+                                            can find information to resolve or prevent
+                                            the reported condition
+                                          type: string
+                                      type: object
+                                    scope:
+                                      description: Scope is list of objects involved
+                                        in the insight
+                                      properties:
+                                        resources:
+                                          description: Resources is a list of resources
+                                            involved in the insight
+                                          items:
+                                            description: ResourceRef is a reference
+                                              to a kubernetes resource, typically
+                                              involved in an insight
+                                            properties:
+                                              apiGroup:
+                                                description: APIGroup of the object
+                                                  being referenced
+                                                type: string
+                                              kind:
+                                                description: Kind of object being
+                                                  referenced
+                                                type: string
+                                              name:
+                                                description: Name of the object being
+                                                  referenced
+                                                type: string
+                                              namespace:
+                                                description: Namespace of the object
+                                                  being referenced, if any
+                                                type: string
+                                            type: object
+                                          type: array
+                                        type:
+                                          description: Type is either ControlPlane
+                                            or WorkerPool
+                                          enum:
+                                          - ControlPlane
+                                          - WorkerPool
+                                          type: string
+                                      required:
+                                      - type
+                                      type: object
+                                    startedAt:
+                                      description: StartedAt is the time when the
+                                        condition reported by the insight started
+                                      format: date-time
+                                      type: string
+                                  type: object
+                                mcp:
+                                  description: MachineConfigPoolStatusInsight is a
+                                    status insight about the state of a worker pool
+                                    update, where the worker pool is represented by
+                                    a MachineConfigPool resource
+                                  properties:
+                                    assessment:
+                                      description: Assessment is the assessment of
+                                        the machine config pool update process
+                                      type: string
+                                    completion:
+                                      description: Completion is a percentage of the
+                                        update completion (0-100)
+                                      format: int32
+                                      type: integer
+                                    conditions:
+                                      description: Conditions provide details about
+                                        the machine config pool
+                                      items:
+                                        description: "Condition contains details for
+                                          one aspect of the current state of this
+                                          API Resource. --- This struct is intended
+                                          for direct use as an array at the field
+                                          path .status.conditions.  For example, \n
+                                          type FooStatus struct{ // Represents the
+                                          observations of a foo's current state. //
+                                          Known .status.conditions.type are: \"Available\",
+                                          \"Progressing\", and \"Degraded\" // +patchMergeKey=type
+                                          // +patchStrategy=merge // +listType=map
+                                          // +listMapKey=type Conditions []metav1.Condition
+                                          `json:\"conditions,omitempty\" patchStrategy:\"merge\"
+                                          patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`
+                                          \n // other fields }"
+                                        properties:
+                                          lastTransitionTime:
+                                            description: lastTransitionTime is the
+                                              last time the condition transitioned
+                                              from one status to another. This should
+                                              be when the underlying condition changed.  If
+                                              that is not known, then using the time
+                                              when the API field changed is acceptable.
+                                            format: date-time
+                                            type: string
+                                          message:
+                                            description: message is a human readable
+                                              message indicating details about the
+                                              transition. This may be an empty string.
+                                            maxLength: 32768
+                                            type: string
+                                          observedGeneration:
+                                            description: observedGeneration represents
+                                              the .metadata.generation that the condition
+                                              was set based upon. For instance, if
+                                              .metadata.generation is currently 12,
+                                              but the .status.conditions[x].observedGeneration
+                                              is 9, the condition is out of date with
+                                              respect to the current state of the
+                                              instance.
+                                            format: int64
+                                            minimum: 0
+                                            type: integer
+                                          reason:
+                                            description: reason contains a programmatic
+                                              identifier indicating the reason for
+                                              the condition's last transition. Producers
+                                              of specific condition types may define
+                                              expected values and meanings for this
+                                              field, and whether the values are considered
+                                              a guaranteed API. The value should be
+                                              a CamelCase string. This field may not
+                                              be empty.
+                                            maxLength: 1024
+                                            minLength: 1
+                                            pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                            type: string
+                                          status:
+                                            description: status of the condition,
+                                              one of True, False, Unknown.
+                                            enum:
+                                            - "True"
+                                            - "False"
+                                            - Unknown
+                                            type: string
+                                          type:
+                                            description: type of condition in CamelCase
+                                              or in foo.example.com/CamelCase. ---
+                                              Many .condition.type values are consistent
+                                              across resources like Available, but
+                                              because arbitrary conditions can be
+                                              useful (see .node.status.conditions),
+                                              the ability to deconflict is important.
+                                              The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                            maxLength: 316
+                                            pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                            type: string
+                                        required:
+                                        - lastTransitionTime
+                                        - message
+                                        - reason
+                                        - status
+                                        - type
+                                        type: object
+                                      type: array
+                                      x-kubernetes-list-map-keys:
+                                      - type
+                                      x-kubernetes-list-type: map
+                                    name:
+                                      description: Name is the name of the machine
+                                        config pool
+                                      type: string
+                                    resource:
+                                      description: Resource is the MachineConfigPool
+                                        resource that represents the pool
+                                      properties:
+                                        apiGroup:
+                                          description: APIGroup of the object being
+                                            referenced
+                                          type: string
+                                        kind:
+                                          description: Kind of object being referenced
+                                          type: string
+                                        name:
+                                          description: Name of the object being referenced
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the object being
+                                            referenced, if any
+                                          type: string
+                                      type: object
+                                    scopeType:
+                                      description: Scope describes whether the pool
+                                        is a control plane or a worker pool
+                                      enum:
+                                      - ControlPlane
+                                      - WorkerPool
+                                      type: string
+                                    summaries:
+                                      description: Summaries is a list of counts of
+                                        nodes matching certain criteria (e.g. updated,
+                                        degraded, etc.)
+                                      items:
+                                        properties:
+                                          count:
+                                            description: Count is the number of nodes
+                                              matching the criteria
+                                            format: int32
+                                            type: integer
+                                          type:
+                                            description: Type is the type of the summary
+                                            type: string
+                                        required:
+                                        - type
+                                        type: object
+                                      type: array
+                                      x-kubernetes-list-map-keys:
+                                      - type
+                                      x-kubernetes-list-type: map
+                                  type: object
+                                node:
+                                  description: NodeStatusInsight is a status insight
+                                    about the state of a worker node update, where
+                                    the worker node is represented by a Node resource
+                                  properties:
+                                    conditions:
+                                      description: Conditions provides details about
+                                        the control plane update
+                                      items:
+                                        description: "Condition contains details for
+                                          one aspect of the current state of this
+                                          API Resource. --- This struct is intended
+                                          for direct use as an array at the field
+                                          path .status.conditions.  For example, \n
+                                          type FooStatus struct{ // Represents the
+                                          observations of a foo's current state. //
+                                          Known .status.conditions.type are: \"Available\",
+                                          \"Progressing\", and \"Degraded\" // +patchMergeKey=type
+                                          // +patchStrategy=merge // +listType=map
+                                          // +listMapKey=type Conditions []metav1.Condition
+                                          `json:\"conditions,omitempty\" patchStrategy:\"merge\"
+                                          patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`
+                                          \n // other fields }"
+                                        properties:
+                                          lastTransitionTime:
+                                            description: lastTransitionTime is the
+                                              last time the condition transitioned
+                                              from one status to another. This should
+                                              be when the underlying condition changed.  If
+                                              that is not known, then using the time
+                                              when the API field changed is acceptable.
+                                            format: date-time
+                                            type: string
+                                          message:
+                                            description: message is a human readable
+                                              message indicating details about the
+                                              transition. This may be an empty string.
+                                            maxLength: 32768
+                                            type: string
+                                          observedGeneration:
+                                            description: observedGeneration represents
+                                              the .metadata.generation that the condition
+                                              was set based upon. For instance, if
+                                              .metadata.generation is currently 12,
+                                              but the .status.conditions[x].observedGeneration
+                                              is 9, the condition is out of date with
+                                              respect to the current state of the
+                                              instance.
+                                            format: int64
+                                            minimum: 0
+                                            type: integer
+                                          reason:
+                                            description: reason contains a programmatic
+                                              identifier indicating the reason for
+                                              the condition's last transition. Producers
+                                              of specific condition types may define
+                                              expected values and meanings for this
+                                              field, and whether the values are considered
+                                              a guaranteed API. The value should be
+                                              a CamelCase string. This field may not
+                                              be empty.
+                                            maxLength: 1024
+                                            minLength: 1
+                                            pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                                            type: string
+                                          status:
+                                            description: status of the condition,
+                                              one of True, False, Unknown.
+                                            enum:
+                                            - "True"
+                                            - "False"
+                                            - Unknown
+                                            type: string
+                                          type:
+                                            description: type of condition in CamelCase
+                                              or in foo.example.com/CamelCase. ---
+                                              Many .condition.type values are consistent
+                                              across resources like Available, but
+                                              because arbitrary conditions can be
+                                              useful (see .node.status.conditions),
+                                              the ability to deconflict is important.
+                                              The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                                            maxLength: 316
+                                            pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                                            type: string
+                                        required:
+                                        - lastTransitionTime
+                                        - message
+                                        - reason
+                                        - status
+                                        - type
+                                        type: object
+                                      type: array
+                                      x-kubernetes-list-map-keys:
+                                      - type
+                                      x-kubernetes-list-type: map
+                                    estToComplete:
+                                      description: EstToComplete is the estimated
+                                        time to complete the update, when known
+                                      type: string
+                                    message:
+                                      description: Message is a human-readable message
+                                        about the node update status
+                                      type: string
+                                    name:
+                                      description: Name is the name of the node
+                                      type: string
+                                    poolResource:
+                                      description: PoolResource is the resource that
+                                        represents the pool the node is a member of
+                                      properties:
+                                        apiGroup:
+                                          description: APIGroup of the object being
+                                            referenced
+                                          type: string
+                                        kind:
+                                          description: Kind of object being referenced
+                                          type: string
+                                        name:
+                                          description: Name of the object being referenced
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the object being
+                                            referenced, if any
+                                          type: string
+                                      type: object
+                                    resource:
+                                      description: Resource is the Node resource that
+                                        represents the node
+                                      properties:
+                                        apiGroup:
+                                          description: APIGroup of the object being
+                                            referenced
+                                          type: string
+                                        kind:
+                                          description: Kind of object being referenced
+                                          type: string
+                                        name:
+                                          description: Name of the object being referenced
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the object being
+                                            referenced, if any
+                                          type: string
+                                      type: object
+                                    version:
+                                      description: Version is the version of the node,
+                                        when known
+                                      type: string
+                                  type: object
+                                type:
+                                  type: string
+                                uid:
+                                  description: UID identifies an insight over time
+                                  type: string
+                              type: object
+                            type: array
+                          name:
+                            description: Name is the name of the insight producer
+                            type: string
+                        required:
+                        - name
+                        type: object
+                      type: array
+                      x-kubernetes-list-map-keys:
+                      - name
+                      x-kubernetes-list-type: map
+                    name:
+                      description: Name is the name of the pool
+                      type: string
+                    resource:
+                      description: Resource is the resource that represents the pool
+                      properties:
+                        apiGroup:
+                          description: APIGroup of the object being referenced
+                          type: string
+                        kind:
+                          description: Kind of object being referenced
+                          type: string
+                        name:
+                          description: Name of the object being referenced
+                          type: string
+                        namespace:
+                          description: Namespace of the object being referenced, if
+                            any
+                          type: string
+                      type: object
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
