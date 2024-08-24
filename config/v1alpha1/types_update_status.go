@@ -160,15 +160,21 @@ const (
 type ClusterOperatorStatusInsightUpdatingReason string
 
 const (
-	ClusterOperatorStatusInsightUpdatingReasonUpdated ClusterOperatorStatusInsightUpdatingReason = "Updated"
-	ClusterOperatorStatusInsightUpdatingReasonPending ClusterOperatorStatusInsightUpdatingReason = "Pending"
+	ClusterOperatorStatusInsightUpdatingReasonUpdated        ClusterOperatorStatusInsightUpdatingReason = "Updated"
+	ClusterOperatorStatusInsightUpdatingReasonPending        ClusterOperatorStatusInsightUpdatingReason = "Pending"
+	ClusterOperatorStatusInsightUpdatingReasonProgressing    ClusterOperatorStatusInsightUpdatingReason = "Progressing"
+	ClusterOperatorStatusInsightUpdatingReasonUnknownUpdate  ClusterOperatorStatusInsightUpdatingReason = "UnclearClusterState"
+	ClusterOperatorStatusInsightUpdatingReasonUnknownVersion ClusterOperatorStatusInsightUpdatingReason = "UnknownVersion"
 )
 
 type ClusterOperatorStatusInsightHealthyReason string
 
 const (
-	OperatorUpdateStatusInsightHealthyReasonUnavailable ClusterOperatorStatusInsightHealthyReason = "Unavailable"
-	OperatorUpdateStatusInsightHealthyReasonDegraded    ClusterOperatorStatusInsightHealthyReason = "Degraded"
+	OperatorUpdateStatusInsightHealthyReasonAllIsWell        ClusterOperatorStatusInsightHealthyReason = "AllIsWell"
+	OperatorUpdateStatusInsightHealthyReasonUnavailable      ClusterOperatorStatusInsightHealthyReason = "Unavailable"
+	OperatorUpdateStatusInsightHealthyReasonDegraded         ClusterOperatorStatusInsightHealthyReason = "Degraded"
+	OperatorUpdateStatusInsightHealthyReasonMissingAvailable ClusterOperatorStatusInsightHealthyReason = "MissingAvailable"
+	OperatorUpdateStatusInsightHealthyReasonMissingDegraded  ClusterOperatorStatusInsightHealthyReason = "MissingDegraded"
 )
 
 type ClusterOperatorStatusInsight struct {
