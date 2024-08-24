@@ -209,7 +209,11 @@ type PoolUpdateStatus struct {
 type PoolUpdateAssessment string
 
 const (
-	PoolUpdateAssessmentPending PoolUpdateAssessment = "Pending"
+	PoolUpdateAssessmentPending     PoolUpdateAssessment = "Pending"
+	PoolUpdateAssessmentCompleted   PoolUpdateAssessment = "Completed"
+	PoolUpdateAssessmentDegraded    PoolUpdateAssessment = "Degraded"
+	PoolUpdateAssessmentExcluded    PoolUpdateAssessment = "Excluded"
+	PoolUpdateAssessmentProgressing PoolUpdateAssessment = "Progressing"
 )
 
 type PoolNodesSummaryType string
@@ -228,7 +232,7 @@ type PoolNodesUpdateSummary struct {
 	// Type is the type of the summary
 	// +required
 	// +kubebuilder:validation:Required
-	Type string `json:"type"`
+	Type PoolNodesSummaryType `json:"type"`
 
 	// Count is the number of nodes matching the criteria
 	Count int32 `json:"count"`
@@ -291,6 +295,9 @@ type NodeStatusInsight struct {
 
 	// Resource is the Node resource that represents the node
 	Resource ResourceRef `json:"resource"`
+
+	// PoolResource is the resource that represents the pool the node is a member of
+	PoolResource PoolResourceRef `json:"poolResource"`
 
 	// Version is the version of the node, when known
 	Version string `json:"version,omitempty"`
