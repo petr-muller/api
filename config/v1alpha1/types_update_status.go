@@ -170,11 +170,11 @@ const (
 type ClusterOperatorStatusInsightHealthyReason string
 
 const (
-	OperatorUpdateStatusInsightHealthyReasonAllIsWell        ClusterOperatorStatusInsightHealthyReason = "AllIsWell"
-	OperatorUpdateStatusInsightHealthyReasonUnavailable      ClusterOperatorStatusInsightHealthyReason = "Unavailable"
-	OperatorUpdateStatusInsightHealthyReasonDegraded         ClusterOperatorStatusInsightHealthyReason = "Degraded"
-	OperatorUpdateStatusInsightHealthyReasonMissingAvailable ClusterOperatorStatusInsightHealthyReason = "MissingAvailable"
-	OperatorUpdateStatusInsightHealthyReasonMissingDegraded  ClusterOperatorStatusInsightHealthyReason = "MissingDegraded"
+	ClusterOperatorUpdateStatusInsightHealthyReasonAllIsWell        ClusterOperatorStatusInsightHealthyReason = "AllIsWell"
+	ClusterOperatorUpdateStatusInsightHealthyReasonUnavailable      ClusterOperatorStatusInsightHealthyReason = "Unavailable"
+	ClusterOperatorUpdateStatusInsightHealthyReasonDegraded         ClusterOperatorStatusInsightHealthyReason = "Degraded"
+	ClusterOperatorUpdateStatusInsightHealthyReasonMissingAvailable ClusterOperatorStatusInsightHealthyReason = "MissingAvailable"
+	ClusterOperatorUpdateStatusInsightHealthyReasonMissingDegraded  ClusterOperatorStatusInsightHealthyReason = "MissingDegraded"
 )
 
 type ClusterOperatorStatusInsight struct {
