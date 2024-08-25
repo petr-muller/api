@@ -196,7 +196,7 @@ type PoolUpdateStatus struct {
 	Name string `json:"name"`
 
 	// Resource is the resource that represents the pool
-	Resource ResourceRef `json:"resource"`
+	Resource PoolResourceRef `json:"resource"`
 
 	// Informers is a list of insight producers, each carries a list of insights
 	// +listType=map
