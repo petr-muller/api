@@ -1,0 +1,26 @@
+clusterversionprogressinsights.update.openshift.io:
+  Annotations:
+    description: Provides summary information about an ongoing cluster control plane
+      update in Standalone clusters.
+    displayName: ClusterVersionProgressInsights
+  ApprovedPRNumber: https://github.com/openshift/api/pull/2012
+  CRDName: clusterversionprogressinsights.update.openshift.io
+  Capability: ""
+  Category: ""
+  FeatureGates:
+  - UpgradeStatus
+  FilenameOperatorName: cluster-version-operator
+  FilenameOperatorOrdering: "02"
+  FilenameRunLevel: "0000_00"
+  GroupName: update.openshift.io
+  HasStatus: true
+  KindName: ClusterVersionProgressInsight
+  Labels: {}
+  PluralName: clusterversionprogressinsights
+  PrinterColumns: []
+  Scope: Cluster
+  ShortNames: null
+  TopLevelFeatureGates:
+  - UpgradeStatus
+  Version: v1alpha1
+

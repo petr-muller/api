@@ -1245,6 +1245,14 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/openshift/api/template/v1.TemplateInstanceSpec":                                          schema_openshift_api_template_v1_TemplateInstanceSpec(ref),
 		"github.com/openshift/api/template/v1.TemplateInstanceStatus":                                        schema_openshift_api_template_v1_TemplateInstanceStatus(ref),
 		"github.com/openshift/api/template/v1.TemplateList":                                                  schema_openshift_api_template_v1_TemplateList(ref),
+		"github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsight":                             schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsight(ref),
+		"github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsightList":                         schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsightList(ref),
+		"github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsightSpec":                         schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsightSpec(ref),
+		"github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsightStatus":                       schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsightStatus(ref),
+		"github.com/openshift/api/update/v1alpha1.ControlPlaneUpdateVersions":                                schema_openshift_api_update_v1alpha1_ControlPlaneUpdateVersions(ref),
+		"github.com/openshift/api/update/v1alpha1.ResourceRef":                                               schema_openshift_api_update_v1alpha1_ResourceRef(ref),
+		"github.com/openshift/api/update/v1alpha1.Version":                                                   schema_openshift_api_update_v1alpha1_Version(ref),
+		"github.com/openshift/api/update/v1alpha1.VersionMetadata":                                           schema_openshift_api_update_v1alpha1_VersionMetadata(ref),
 		"github.com/openshift/api/user/v1.Group":                                                             schema_openshift_api_user_v1_Group(ref),
 		"github.com/openshift/api/user/v1.GroupList":                                                         schema_openshift_api_user_v1_GroupList(ref),
 		"github.com/openshift/api/user/v1.Identity":                                                          schema_openshift_api_user_v1_Identity(ref),
@@ -63947,6 +63955,354 @@ func schema_openshift_api_template_v1_TemplateList(ref common.ReferenceCallback)
 		},
 		Dependencies: []string{
 			"github.com/openshift/api/template/v1.Template", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsight(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterVersionStatusInsight reports the state of a ClusterVersion resource (which represents a control plane update in standalone clusters), during the update.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Description: "spec is empty for now, ClusterVersionStatusInsight is purely status-reporting API. In the future spec may be used to hold configuration to drive what information is surfaced and how",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsightSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Description: "status exposes the health and status of the ongoing cluster update",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsightStatus"),
+						},
+					},
+				},
+				Required: []string{"spec"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsightSpec", "github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsightStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsightList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterVersionProgressInsightList is a list of ClusterVersionProgressInsightList resources\n\nCompatibility level 4: No compatibility is provided, the API can change at any point for any reason. These capabilities should not be used by applications needing long term support.",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "items is a list of ClusterVersionStatusInsight resources",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsight"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/update/v1alpha1.ClusterVersionProgressInsight", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsightSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ClusterVersionProgressInsightSpec is empty for now, ClusterVersionProgressInsightSpec is purely status-reporting API. In the future spec may be used to hold configuration to drive what information is surfaced and how",
+				Type:        []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_ClusterVersionProgressInsightStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"conditions": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"type",
+								},
+								"x-kubernetes-list-type":       "map",
+								"x-kubernetes-patch-merge-key": "type",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "conditions provides detailed observed conditions about ClusterVersion",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.Condition"),
+									},
+								},
+							},
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "resource is the ClusterVersion resource that represents the control plane\n\nNote: By OpenShift API conventions, in isolation this should be a specialized reference that refers just to resource name (because the rest is implied by status insight type). However, because we use resource references in many places and this API is intended to be consumed by clients, not produced, consistency seems to be more valuable than type safety for producers.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/update/v1alpha1.ResourceRef"),
+						},
+					},
+					"assessment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "assessment is the assessment of the control plane update process",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"versions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "versions contains the original and target versions of the upgrade",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/update/v1alpha1.ControlPlaneUpdateVersions"),
+						},
+					},
+					"completion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "completion is a percentage of the update completion (0-100)",
+							Default:     0,
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"startedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "startedAt is the time when the update started",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"completedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "completedAt is the time when the update completed",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+					"estimatedCompletedAt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "estimatedCompletedAt is the estimated time when the update will complete",
+							Ref:         ref("k8s.io/apimachinery/pkg/apis/meta/v1.Time"),
+						},
+					},
+				},
+				Required: []string{"resource", "assessment", "versions", "completion", "startedAt"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/update/v1alpha1.ControlPlaneUpdateVersions", "github.com/openshift/api/update/v1alpha1.ResourceRef", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_ControlPlaneUpdateVersions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ControlPlaneUpdateVersions contains the original and target versions of the upgrade",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"previous": {
+						SchemaProps: spec.SchemaProps{
+							Description: "previous is the version of the control plane before the update. When the cluster is being installed for the first time, the version will have a placeholder value '<none>' and carry 'Installation' metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/update/v1alpha1.Version"),
+						},
+					},
+					"target": {
+						SchemaProps: spec.SchemaProps{
+							Description: "target is the version of the control plane after the update. It may never be '<none>' or have `Installation` metadata",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/openshift/api/update/v1alpha1.Version"),
+						},
+					},
+				},
+				Required: []string{"previous", "target"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/update/v1alpha1.Version"},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_ResourceRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ResourceRef is a reference to a kubernetes resource, typically involved in an insight",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"group": {
+						SchemaProps: spec.SchemaProps{
+							Description: "group of the object being referenced, if any",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "resource of object being referenced",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "name of the object being referenced",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namespace": {
+						SchemaProps: spec.SchemaProps{
+							Description: "namespace of the object being referenced, if any",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"resource", "name"},
+			},
+		},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_Version(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "Version describes a version involved in an update, typically on one side of an update edge",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"version": {
+						SchemaProps: spec.SchemaProps{
+							Description: "version is a semantic version string, or a placeholder '<none>' for the special case where this is a \"previous\" version in a new installation, in which case the metadata must contain an item with key 'Installation'",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-map-keys": []interface{}{
+									"key",
+								},
+								"x-kubernetes-list-type":       "map",
+								"x-kubernetes-patch-merge-key": "key",
+								"x-kubernetes-patch-strategy":  "merge",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Description: "metadata is a list of metadata associated with the version. It is a list of key-value pairs. The value is optional and when not provided, the metadata item has boolean semantics (presence indicates true)",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/openshift/api/update/v1alpha1.VersionMetadata"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"version"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/openshift/api/update/v1alpha1.VersionMetadata"},
+	}
+}
+
+func schema_openshift_api_update_v1alpha1_VersionMetadata(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "VersionMetadata is a key:value item assigned to version involved in the update. Value can be empty, then the metadata have boolean semantics (true when present, false when absent)",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"key": {
+						SchemaProps: spec.SchemaProps{
+							Description: "key is the name of this metadata value",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Description: "value is the value for the metadata",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"key"},
+			},
+		},
 	}
 }
 
